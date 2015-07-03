@@ -20,7 +20,6 @@ function printMas(mas1, mas2){
 
 function compareMas(mas1, mas2){
 	var htm = '<br/> <p>';
-	var bufer = [];
 	for (var i = 0; i < mas1.length; i++){
 		if(mas1[i] == mas2[i])
 			htm += 'Совпадение в строке ' + i + ' в слове ' + mas1[i] + '<br/>';
