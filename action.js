@@ -18,7 +18,20 @@ function printMas(mas1, mas2){
     document.getElementById('tab').innerHTML = table;
 }
 
-mas1 = ['Банан', 'Яблоко', 'Клубника', 'Мандарин', 'Апельсин', 'Лимон'];
-mas2 = ['Груша', 'Маракуйя', 'Клубника', 'Апельсин', 'Земляника', 'Арбуз', 'Банан'];
+function compareMas(mas1, mas2){
+	var htm = '<br/> <p>';
+	var bufer = [];
+	for (var i = 0; i < mas1.length; i++){
+		if(mas1[i] == mas2[i])
+			htm += 'Совпадение в строке ' + i + ' в слове ' + mas1[i] + '<br/>';
+	}
+	htm += '</p>';
+	document.getElementById('result').innerHTML = htm;
+}
+
+
+
+var mas1 = ['Банан', 'Яблоко', 'Клубника', 'Мандарин', 'Апельсин', 'Лимон'];
+var mas2 = ['Груша', 'Маракуйя', 'Клубника', 'Апельсин', 'Земляника', 'Арбуз', 'Банан'];
 
 printMas(mas1, mas2);
