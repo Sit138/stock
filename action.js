@@ -6,9 +6,9 @@
 */
 
 function printMas(mas1, mas2){ 
-    var table = '<table border = 2><tr>';
+    var table = '<table border = 2 id="tab">';
     for (var i = 0, j = 0; i < mas1.length,j < mas2.length; i++, j++){
-        table += '<td>' + mas1[i] + '</td>';
+        table += '<tr><td>' + mas1[i] + '</td>';
 		table += '<td>' + mas2[j] + '</td>';
 		table += '</tr>';
     }
@@ -25,7 +25,7 @@ function compareMas(mas1, mas2){
 	htm += '<p>';
 	for (var i = 0; i < mas1.length; i++){
 		if(mas1[i] == mas2[i])
-			htm += 'Совпадение в строке ' + i + ' в слове ' + mas1[i] + '<br/>';
+			htm += 'Совпадение в строке ' + (i + +1) + ' в слове ' + mas1[i] + '<br/>';
 	}
 	htm += '</p>';
 	document.getElementById('result').innerHTML = htm;
