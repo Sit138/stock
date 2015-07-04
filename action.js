@@ -13,14 +13,16 @@ function printMas(mas1, mas2){
 		table += '</tr>';
     }
 	table += '</table>';
-	document.getElementById('tab').innerHTML = table;
+	return table;
+	//document.getElementById('result').innerHTML = htm;
 }
 
 /*
 Сравнение двух массивов, вывод соответствующих строк
  */
 function compareMas(mas1, mas2){
-	var htm = '<p>';
+	var htm = printMas(mas1, mas2);
+	htm += '<p>';
 	for (var i = 0; i < mas1.length; i++){
 		if(mas1[i] == mas2[i])
 			htm += 'Совпадение в строке ' + i + ' в слове ' + mas1[i] + '<br/>';
@@ -63,6 +65,17 @@ function sortMas(mas){
 		htm += '<b>Отсортированный в обратном порядке массив</b>: ' + mas.sort().reverse();
 	}
 	htm += '</p>';
+	document.getElementById('result').innerHTML = htm;
+}
+
+/*
+
+ */
+
+function findStr(mas1, mas2){
+	var htm = printMas(mas1, mas2);
+	htm += '<p><input type="text" value="" id="str"><button onclick="findStr()">ОК</button></p>';
+
 	document.getElementById('result').innerHTML = htm;
 }
 
