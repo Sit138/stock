@@ -18,7 +18,7 @@ function printMas(mas1, mas2){
 }
 
 /*
-Сравнение двух массивов, вывод соответствующих строк
+1.1 Сравнение двух массивов, вывод соответствующих строк
  */
 function compareMas(mas1, mas2){
 	var htm = printMas(mas1, mas2);
@@ -32,10 +32,9 @@ function compareMas(mas1, mas2){
 }
 
 /*
- Сравнение строк в массиве
+ 1.2 - Сравнение строк в массиве
  Выделение цветов совпадающих строк
  */
-
 function compareMasColor(mas1, mas2){
 	var htm = '<table border = 2><tr>';
 	for (var i = 0, j = 0; i < mas1.length,j < mas2.length; i++, j++){
@@ -53,9 +52,8 @@ function compareMasColor(mas1, mas2){
 }
 
 /*
-Сортировка массива по алфавиту и в обратном порядке
+1.3 - Сортировка массива по алфавиту и в обратном порядке
 */
-
 function sortMas(mas){
 	var htm = '<p> <b>Исходный массив :</b> ' + mas + '<br/>';
 	var val = +prompt("В каком порядке будем сортировать? (1 -> 2 <-)", '1');
@@ -69,14 +67,21 @@ function sortMas(mas){
 }
 
 /*
-
- */
-
-function findStr(mas1, mas2){
+Подготовка страницы к 1.4
+вывод таблицы и под таблицей поле ввода с кнопкой
+*/
+function prevFour(mas1, mas2){
 	var htm = printMas(mas1, mas2);
 	htm += '<p><input type="text" value="" id="str"><button onclick="findStr()">ОК</button></p>';
-
 	document.getElementById('result').innerHTML = htm;
+}
+
+/*
+1.4 -
+ */
+
+function findStr(){
+	alert('');
 }
 
 var mas1 = ['Банан', 'Яблоко', 'Клубника', 'Мандарин', 'Апельсин', 'Лимон'];
