@@ -72,7 +72,7 @@ function sortMas(mas){
 */
 function prevFour(mas1, mas2){
 	var htm = printMas(mas1, mas2);
-	htm += '<p><input type="text" value="" id="str"><button onclick="findStr(mas1)">ОК</button></p>';
+	htm += '<p>Ввести символы для поиска в нижнем регистре<input type="text" value="" id="str"><button onclick="findStr(mas1)">ОК</button></p>';
 	document.getElementById('result').innerHTML = htm;
 }
 
@@ -85,8 +85,8 @@ function findStr(mas){
 	var i = 0, j = 0, htm = '<p><b>Найденные совпадения<b><br/>';
 	for(i = 0; i < mas.length; i++){
 		for(j = 0; j < mas[i].length; j++){
-			var charLetter = mas[i].charAt(j); //беру текущий символ текущего слоав
-			if(srt.indexOf(charLetter) === -1) htm += '' + mas[i].charAt(j);//если есть в в поисковой строке то...
+			var charLetter = mas[i].charAt(j); //беру текущий символ текущего слова
+			if(srt.indexOf(charLetter.toLowerCase()) == -1) htm += '' + mas[i].charAt(j);//если есть в в поисковой строке то...
 				else htm += '' + mas[i].charAt(j).fontcolor('red');
 		}
 		htm += ' ';
