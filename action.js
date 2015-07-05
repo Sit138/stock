@@ -72,7 +72,7 @@ function sortMas(mas){
 */
 function prevFour(mas1, mas2){
 	var htm = printMas(mas1, mas2);
-	htm += '<p>Ввести символы для поиска в нижнем регистре<input type="text" value="" id="str"><button onclick="findStr(mas1)">ОК</button></p>';
+	htm += '<p>Ввести символы для поиска в нижнем регистре<br/><input type="text" value="" id="str"><button onclick="findStr(mas1)">ОК</button></p>';
 	document.getElementById('result').innerHTML = htm;
 }
 
