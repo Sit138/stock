@@ -81,29 +81,19 @@ function prevFour(mas1, mas2){
  */
 
 function findStr(mas){
-	/* попробовал без indexOf(). Дублирует массив из-за второго цикла.
-	var arr = document.getElementById('str').value.split(',');//разбиваю введенную строку в массив
-	var strMas = mas1.join(',').split('');//массив слов бью на буквы
-	var i = 0;
-	for(var j = 0; j < arr.length; j++){
-		for(var i = 0; i < strMas.length; i++){
-			if(strMas[i] == arr[j]) document.write(strMas[i].fontcolor('red'));
-			else document.write(strMas[i]);
-			//document.write(strMas[i]);
-		}
-	}*/
-
-	var i = 0, htm = '<p><b>Найденные совпадения в массиве 1<b><br/>';
 	var srt = document.getElementById('str').value;
-	var arr = mas.join(',');
-	do{
-		var pos = arr.indexOf(srt, i);
-		i = pos + 1;
-		htm += ' -- <span class="colortext">' + arr.slice(pos, pos + srt.length) + '</span>' + '<br/>';
-	} while (pos != -1);
+	var i = 0, j = 0, htm = '<p><b>Найденные совпадения<b><br/>';
+	for(i = 0; i < mas.length; i++){
+		for(j = 0; j < mas[i].length; j++){
+			var charLetter = mas[i].charAt(j); //беру текущий символ текущего слоав
+			if(srt.indexOf(charLetter) === -1) htm += '' + mas[i].charAt(j);//если есть в в поисковой строке то...
+				else htm += '' + mas[i].charAt(j).fontcolor('red');
+		}
+		htm += ' ';
+	}
 	htm += '</p>';
 	document.getElementById('result').innerHTML = htm;
 }
 
-var mas1 = ['Банан', 'Яблоко', 'Клубника', 'Мандарин', 'Апельсин', 'Лимон'];
-var mas2 = ['Груша', 'Маракуйя', 'Клубника', 'Апельсин', 'Земляника', 'Лимон', 'Банан'];
+var mas1 = ['Банан', 'Яблоко', 'Клубника', 'Мандарин', 'Груша', 'Лимон'];
+var mas2 = ['Груша', 'Маракуйя', 'Клубника', 'Груша', 'Земляника', 'Лимон', 'Банан'];
