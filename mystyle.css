@@ -1,0 +1,14 @@
+button{
+    background-color: chartreuse;
+    width: 100px;
+}
+hr{
+    height: 20px;
+    background-color: #062569;
+}
+p{
+    font-size: x-large;
+}
+.colortext{
+    color: red;
+}

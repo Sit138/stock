@@ -3,35 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Задание 1</title>
-    <style>
-        button{
-            background-color: chartreuse;
-            width: 100px;
-        }
-        hr{
-            height: 20px;
-            background-color: #062569;
-        }
-        p{
-            font-size: x-large;
-        }
-        .colortext{
-            color: red;
-        }
-    </style>
-    <script src="action.js"></script>
+    <link rel="stylesheet" href="mystyle.css"><!--связка с .css-->
+
 </head>
 <body>
 <h1>Results</h1>
 <hr/>
+<div id="result"></div>
+<div id="result2"></div>
+<script src="action.js"></script>
 <p>
     <button onclick="compareMas(mas1, mas2)">1.1 - Сравнение массивов</button>
     <button onclick="compareMasColor(mas1, mas2)">1.2 - Цветастые строки</button>
     <button onclick="sortMas(mas1)">1.3 - Сортировка по алфавиту</button>
     <button onclick="prevFour(mas1, mas2)">1.4 - Цветные символы массивов</button>
 </p>
-<div id="result"></div>
-<div id="result2"></div>
+
+
 
 </body>
 </html>

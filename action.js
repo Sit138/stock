@@ -5,30 +5,34 @@
 	Эти массивы должны выводиться на html страничку в виде таблицы с двумя столбцами. 
 */
 
-function printMas(mas1, mas2){ 
+function printMas(mas1, mas2){
     var table = '<table border = 2 id="tab">';
     for (var i = 0, j = 0; i < mas1.length,j < mas2.length; i++, j++){
-        table += '<tr><td>' + mas1[i] + '</td>';
-		table += '<td>' + mas2[j] + '</td>';
+        if(i >= mas1.length) table += '<tr><td>' + '' + '</td>';
+		 else table += '<tr><td>' + mas1[i] + '</td>';
+		if(j >= mas2.length) table += '<td>' + '' + '</td>';
+			else table += '<td>' + mas2[j] + '</td>';
 		table += '</tr>';
     }
 	table += '</table>';
-	return table;
-	//document.getElementById('result').innerHTML = htm;
+	//return table;
+	document.getElementById('result').innerHTML = table;
 }
 
 /*
 1.1 Сравнение двух массивов, вывод соответствующих строк
  */
 function compareMas(mas1, mas2){
-	var htm = printMas(mas1, mas2);
-	htm += '<p>';
+	//var htm = printMas(mas1, mas2);
+	var htm = '<p>';
 	for (var i = 0; i < mas1.length; i++){
-		if(mas1[i] == mas2[i])
-			htm += 'Совпадение в строке ' + (i + +1) + ' в слове ' + mas1[i] + '<br/>';
+		for(var j = 0; j < mas2.length; j++){
+			if(mas1[i] == mas2[j])
+				htm += 'Совпадение в строках ' + (i + +1) + ' и ' + (j + +1) + ' в слове ' + mas1[i] + '<br/>';
+		}
 	}
 	htm += '</p>';
-	document.getElementById('result').innerHTML = htm;
+	document.getElementById('result2').innerHTML = htm;
 }
 
 /*
@@ -36,9 +40,10 @@ function compareMas(mas1, mas2){
  Выделение цветов совпадающих строк
  */
 function compareMasColor(mas1, mas2){
+
 	var htm = '<table border = 2><tr>';
 	for (var i = 0, j = 0; i < mas1.length,j < mas2.length; i++, j++){
-		if(mas1[i] == mas2[i]){
+		if(mas1[i] == mas2[j]){
 			htm += '<td bgcolor="#EE2C2C">' + mas1[i] + '</td>';
 			htm += '<td bgcolor="#EE2C2C">' + mas2[j] + '</td>';
 		} else{
@@ -63,7 +68,7 @@ function sortMas(mas){
 		htm += '<b>Отсортированный в обратном порядке массив</b>: ' + mas.sort().reverse();
 	}
 	htm += '</p>';
-	document.getElementById('result').innerHTML = htm;
+	document.getElementById('result2').innerHTML = htm;
 }
 
 /*
@@ -73,7 +78,7 @@ function sortMas(mas){
 function prevFour(mas1, mas2){
 	var htm = printMas(mas1, mas2);
 	htm += '<p>Ввести символы для поиска в нижнем регистре<br/><input type="text" value="" id="str"><button onclick="findStr(mas1)">ОК</button></p>';
-	document.getElementById('result').innerHTML = htm;
+	document.getElementById('result2').innerHTML = htm;
 }
 
 /*
@@ -92,8 +97,9 @@ function findStr(mas){
 		htm += ' ';
 	}
 	htm += '</p>';
-	document.getElementById('result').innerHTML = htm;
+	document.getElementById('result2').innerHTML = htm;
 }
 
 var mas1 = ['Банан', 'Яблоко', 'Клубника', 'Мандарин', 'Груша', 'Лимон'];
-var mas2 = ['Груша', 'Маракуйя', 'Клубника', 'Груша', 'Земляника', 'Лимон', 'Банан'];
+var mas2 = ['Арбуз', 'Маракуйя','Смородина' , 'Клубника', 'Земляника', 'Груша', 'Апельсин', 'Слива'];
+printMas(mas1, mas2);
