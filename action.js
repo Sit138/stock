@@ -7,6 +7,8 @@
 
 function printMas(mas1, mas2){
     var table = '<table border = 2 id="tab">';
+	table += '<tr><th><button onclick="sortMas(mas1)">А-Я</button></th>';
+	table += '<th><button onclick="sortMas(mas2)">А-Я</button></th></tr>';
     for (var i = 0, j = 0; i < mas1.length,j < mas2.length; i++, j++){
         if(i >= mas1.length) table += '<tr><td>' + '' + '</td>';
 		 else table += '<tr><td>' + mas1[i] + '</td>';

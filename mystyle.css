@@ -1,6 +1,7 @@
 button{
     background-color: chartreuse;
     width: 100px;
+    height: 20px;
 }
 hr{
     height: 20px;
@@ -8,7 +9,4 @@ hr{
 }
 p{
     font-size: x-large;
-}
-.colortext{
-    color: red;
 }
