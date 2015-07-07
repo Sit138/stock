@@ -1,11 +1,4 @@
-﻿/* 
-	Написать функцию, для работы с двумя массивами данных. 
-	Массивы могут содержать, например, списки имен или названий фруктов. 
-	Изначально данные в массивах не должны быть отсортированы по алфавиту. 
-	Эти массивы должны выводиться на html страничку в виде таблицы с двумя столбцами. 
-*/
-
-function printMas(mas1, mas2){
+﻿function printMas(mas1, mas2){
     var table = '<table border = 2 id="tab">';
 	table += '<tr><th><button id="but1"">А-Я</button></th>';
 	table += '<th><button id="but2" ">А-Я</button></th></tr>';
@@ -89,13 +82,11 @@ var mas1 = ['Банан', 'Яблоко', 'Клубника', 'Мандарин'
 var mas2 = ['арбуз', 'маракуйя','смородина' , 'клубника', 'земляника', 'груша', 'апельсин', 'слива'];
 printMas(mas1, mas2);
 
-
 var but1 = document.getElementById('but1');
 but1.addEventListener("click", wrapper(mas1));
 var but2 = document.getElementById('but2');
 but2.addEventListener("click", wrapper3(mas2));
 
-//замыкания.
 function wrapper(mas){
 	return function sortMas(){
 		var newMas = [];
