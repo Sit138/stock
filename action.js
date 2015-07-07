@@ -7,8 +7,8 @@
 
 function printMas(mas1, mas2){
     var table = '<table border = 2 id="tab">';
-	table += '<tr><th><button onclick="sortMas(mas1)">А-Я</button></th>';
-	table += '<th><button onclick="sortMas(mas2)">А-Я</button></th></tr>';
+	table += '<tr><th><button id="but1"">А-Я</button></th>';
+	table += '<th><button id="but2" ">А-Я</button></th></tr>';
     for (var i = 0, j = 0; i < mas1.length,j < mas2.length; i++, j++){
         if(i >= mas1.length) table += '<tr><td>' + '' + '</td>';
 		 else table += '<tr><td>' + mas1[i] + '</td>';
@@ -59,21 +59,6 @@ function compareMasColor(mas1, mas2){
 }
 
 /*
-1.3 - Сортировка массива по алфавиту и в обратном порядке
-*/
-function sortMas(mas){
-	var htm = '<p> <b>Исходный массив :</b> ' + mas + '<br/>';
-	var val = +prompt("В каком порядке будем сортировать? (1 -> 2 <-)", '1');
-	if(val == 1){
-		htm += '<b>Отсортированный по алфавиту массив:</b> ' + mas.sort();
-	} else {
-		htm += '<b>Отсортированный в обратном порядке массив</b>: ' + mas.sort().reverse();
-	}
-	htm += '</p>';
-	document.getElementById('result2').innerHTML = htm;
-}
-
-/*
 Подготовка страницы к 1.4
 вывод таблицы и под таблицей поле ввода с кнопкой
 */
@@ -105,3 +90,36 @@ function findStr(mas){
 var mas1 = ['Банан', 'Яблоко', 'Клубника', 'Мандарин', 'Груша', 'Лимон'];
 var mas2 = ['Арбуз', 'Маракуйя','Смородина' , 'Клубника', 'Земляника', 'Груша', 'Апельсин', 'Слива'];
 printMas(mas1, mas2);
+
+
+var but1 = document.getElementById('but1');
+var but2 = document.getElementById('but2');
+function wrapper(mas){
+	return function sortMas(){
+		var newMas = [];
+		for (var i = 0; i < mas.length; i++)//копирую массив, дабы его не менять
+			newMas[i] = mas[i];
+		var htm = '<p> <b>Исходный массив :</b> ' + mas + '<br/>';
+			htm += '<b>Отсортированный по алфавиту массив:</b> ' + newMas.sort();
+		htm += '</p>';
+		document.getElementById('result2').innerHTML = htm;
+		but1.textContent = 'Я-А';
+		but1.removeEventListener("click", wrapper(mas1));
+		but1.addEventListener("click", wrapper2(mas1));
+	}
+}
+but1.addEventListener("click", wrapper(mas1));
+function wrapper2(mas){
+	return function sortMasRev(){
+		var newMas = [];
+		for (var i = 0; i < mas.length; i++)//копирую массив, дабы его не менять
+			newMas[i] = mas[i];
+		var htm = '<p> <b>Исходный массив :</b> ' + mas + '<br/>';
+		htm += '<b>Отсортированный в обратном порядке массив</b>: ' + newMas.sort().reverse();
+		htm += '</p>';
+		document.getElementById('result2').innerHTML = htm;
+		but1.textContent = 'А-Я';
+		but1.removeEventListener("click", wrapper2(mas1));
+		but1.addEventListener("click", wrapper(mas1));
+	}
+}
