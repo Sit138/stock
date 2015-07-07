@@ -62,8 +62,7 @@ function compareMasColor(mas1, mas2){
 вывод таблицы и под таблицей поле ввода с кнопкой
 */
 function prevFour(mas1, mas2){
-	var htm = printMas(mas1, mas2);
-	htm += '<p>Ввести символы для поиска в нижнем регистре<br/><input type="text" value="" id="str"><button onclick="findStr(mas1)">ОК</button></p>';
+	var htm = '<p>Ввести символы для поиска в нижнем регистре<br/><input type="text" value="" id="str"><button onclick="findStr(mas1)">ОК</button></p>';
 	document.getElementById('result2').innerHTML = htm;
 }
 
