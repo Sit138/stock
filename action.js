@@ -17,7 +17,6 @@ function printMas(mas1, mas2){
 		table += '</tr>';
     }
 	table += '</table>';
-	//return table;
 	document.getElementById('result').innerHTML = table;
 }
 
@@ -88,38 +87,102 @@ function findStr(mas){
 }
 
 var mas1 = ['Банан', 'Яблоко', 'Клубника', 'Мандарин', 'Груша', 'Лимон'];
-var mas2 = ['Арбуз', 'Маракуйя','Смородина' , 'Клубника', 'Земляника', 'Груша', 'Апельсин', 'Слива'];
+var mas2 = ['арбуз', 'маракуйя','смородина' , 'клубника', 'земляника', 'груша', 'апельсин', 'слива'];
 printMas(mas1, mas2);
 
 
 var but1 = document.getElementById('but1');
+but1.addEventListener("click", wrapper(mas1));
 var but2 = document.getElementById('but2');
+but2.addEventListener("click", wrapper3(mas2));
+
+//замыкания.
 function wrapper(mas){
 	return function sortMas(){
 		var newMas = [];
 		for (var i = 0; i < mas.length; i++)//копирую массив, дабы его не менять
 			newMas[i] = mas[i];
-		var htm = '<p> <b>Исходный массив :</b> ' + mas + '<br/>';
-			htm += '<b>Отсортированный по алфавиту массив:</b> ' + newMas.sort();
-		htm += '</p>';
-		document.getElementById('result2').innerHTML = htm;
+		newMas = mas.sort();
+		var myTable = document.getElementById('tab');
+		var trList = myTable.getElementsByTagName('tr');
+		for (i = 1; i <= trList.length - 1; i++){
+			var tdList = trList[i].getElementsByTagName('td');
+			for (var j = 0; j < tdList.length; j++){
+				if(j == 0){
+					if(i > newMas.length){
+						tdList[j].innerHTML = '';
+					}
+						else tdList[j].innerHTML = newMas[i - 1];
+				}
+			}
+		}
 		but1.textContent = 'Я-А';
 		but1.removeEventListener("click", wrapper(mas1));
 		but1.addEventListener("click", wrapper2(mas1));
 	}
 }
-but1.addEventListener("click", wrapper(mas1));
+
 function wrapper2(mas){
 	return function sortMasRev(){
 		var newMas = [];
 		for (var i = 0; i < mas.length; i++)//копирую массив, дабы его не менять
 			newMas[i] = mas[i];
-		var htm = '<p> <b>Исходный массив :</b> ' + mas + '<br/>';
-		htm += '<b>Отсортированный в обратном порядке массив</b>: ' + newMas.sort().reverse();
-		htm += '</p>';
-		document.getElementById('result2').innerHTML = htm;
+		newMas = mas.sort().reverse();
+		var myTable = document.getElementById('tab');
+		var trList = myTable.getElementsByTagName('tr');
+		for (i = 1; i <= trList.length - 1; i++){
+			var tdList = trList[i].getElementsByTagName('td');
+			for (var j = 0; j < tdList.length; j++){
+				if(j == 0){
+					if(i > newMas.length){
+						tdList[j].innerHTML = '';
+					}
+						else tdList[j].innerHTML = newMas[i - 1];
+				}
+			}
+		}
 		but1.textContent = 'А-Я';
-		but1.removeEventListener("click", wrapper2(mas1));
-		but1.addEventListener("click", wrapper(mas1));
+		but1.removeEventListener("click", wrapper2(mas));
+		but1.addEventListener("click", wrapper(mas));
+	}
+}
+
+function wrapper3(mas){
+	return function sortMas(){
+		var newMas = [];
+		for (var i = 0; i < mas.length; i++)//копирую массив, дабы его не менять
+			newMas[i] = mas[i];
+		newMas = mas.sort();
+		var myTable = document.getElementById('tab');
+		var trList = myTable.getElementsByTagName('tr');
+		for (i = 1; i <= trList.length - 1; i++){
+			var tdList = trList[i].getElementsByTagName('td');
+			for (var j = 0; j < tdList.length; j++){
+				if(j == 1) tdList[j].innerHTML = newMas[i - 1];
+			}
+		}
+		but2.textContent = 'Я-А';
+		but2.removeEventListener("click", wrapper3(mas));
+		but2.addEventListener("click", wrapper4(mas));
+	}
+}
+
+function wrapper4(mas){
+	return function sortMasRev(){
+		var newMas = [];
+		for (var i = 0; i < mas.length; i++)//копирую массив, дабы его не менять
+			newMas[i] = mas[i];
+		newMas = mas.sort().reverse();
+		var myTable = document.getElementById('tab');
+		var trList = myTable.getElementsByTagName('tr');
+		for (i = 1; i <= trList.length - 1; i++){
+			var tdList = trList[i].getElementsByTagName('td');
+			for (var j = 0; j < tdList.length; j++){
+				if(j == 1) tdList[j].innerHTML = newMas[i - 1];
+			}
+		}
+		but2.textContent = 'А-Я';
+		but2.removeEventListener("click", wrapper4(mas));
+		but2.addEventListener("click", wrapper3(mas));
 	}
 }
