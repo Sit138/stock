@@ -1,26 +1,70 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
+<head lang="rus">
     <meta charset="UTF-8">
-    <title>Задание 1</title>
-    <link rel="stylesheet" href="mystyle.css">
-
+    <title>Result</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Results</h1>
-<hr/>
-<div id="result"></div>
-<div id="result2"></div>
+<table border="0" id="tab">
+    <tr><th colspan="2"><input type="button" id="but1" value="А-Я"></th>
+        <th colspan="2"><input type="button" id="but2" value="А-Я"></th></tr>
+    <tbody>
+    </tbody>
+</table>
 <script src="action.js"></script>
-
-
 <p>
-    <button onclick="compareMas(mas1, mas2)">1.1 - Сравнение массивов</button>
-    <!--<button onclick="compareMasColor(mas1, mas2)">1.2 - Цветастые строки</button>-->
-    <button onclick="prevFour(mas1, mas2)">1.4 - Цветные символы массивов</button>
+<a href="#" onclick="hideMenu('menu1'); return false">Работа с массивом 1</a>
+<div id="menu1" style="display: none">
+    <form method="post">
+        <input type="checkbox" onclick="hideMenu('menuAdd')" name="a"/>Добавить элемент<br/>
+        <div id="menuAdd" style="display: none">
+            <form>
+                <input type="text" id="addElem" class="addTExt"/><input type="button" id="butAdd1" onclick="addElemOnMas('butAdd1', mas1)" value="Добавить">
+            </form>
+        </div>
+        <input type="checkbox" name="a"/>Удалить элемент<br/>
+        <input type="checkbox" name="a" id="checkClear" onclick="hideMenu('menuClear')"/>Очистить массив<br/>
+        <div id="menuClear" style="display: none">
+            <form class="formShow">
+                <fieldset style="width: 150px">
+                    <legend></legend>
+                    Вы уверены, что хотите очистить массив?<br/>
+                    <input type="button" value="Да" id="butClear1" onclick="clearMas('butClear1', mas1)">
+                    <input type="button" value="Отмена" onclick="hideMenu('menuClear')">
+                </fieldset>
+            </form>
+        </div>
+    </form>
+</div>
 </p>
 
+<p>
+    <a href="#" onclick="hideMenu('menu2'); return false">Работа с массивом 2</a>
+<div id="menu2" style="display: none">
+    <form method="post">
+        <input type="checkbox" onclick="hideMenu('menu2Add')" name="a"/>Добавить элемент<br/>
+        <div id="menu2Add" style="display: none">
+            <form>
+                <input type="text" id="addElem2" class="addTExt"/><input type="button" id="butAdd2" onclick="addElemOnMas('butAdd2',mas2)"  value="Добавить">
+            </form>
+        </div>
+        <input type="checkbox" name="a"/>Удалить элемент<br/>
+        <input type="checkbox" name="a" id="check2Clear" onclick="hideMenu('menu2Clear')"/>Очистить массив<br/>
+        <div id="menu2Clear" style="display: none">
+            <form class="formShow">
+                <fieldset style="width: 150px">
+                    <legend></legend>
+                    Вы уверены, что хотите очистить массив?<br/>
+                    <input type="button" value="Да" id="butClear2" onclick="clearMas('butClear2', mas2)">
+                    <input type="button" value="Отмена" onclick="hideMenu('menu2Clear')">
+                </fieldset>
+            </form>
+        </div>
+    </form>
+</div>
+</p>
 
-
+<input type="button" onclick="f()">
 </body>
 </html>

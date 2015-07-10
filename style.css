@@ -1,0 +1,14 @@
+a{
+    color: black;
+    background-color: white;
+    font-size: large;
+    font-family: fantasy;
+}
+.addTExt{
+    color: black;
+    background-color: lightgrey;
+}
+.formShow{
+    background-color: red;
+    width: 180px;
+}

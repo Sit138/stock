@@ -1,178 +1,268 @@
-﻿function printMas(mas1, mas2){
-    var table = '<table border = 2 id="tab">';
-	table += '<tr><th><button id="but1"">А-Я</button></th>';
-	table += '<th><button id="but2" ">А-Я</button></th></tr>';
-    for (var i = 0, j = 0; i < mas1.length,j < mas2.length; i++, j++){
-        if(i >= mas1.length) table += '<tr><td>' + '' + '</td>';
-		 else table += '<tr><td>' + mas1[i] + '</td>';
-		if(j >= mas2.length) table += '<td>' + '' + '</td>';
-			else table += '<td>' + mas2[j] + '</td>';
-		table += '</tr>';
+﻿var mas1 = ["Яблоко", "Груша", "Банан"];
+var mas2 = ["Груша", "Вишня", "Арбуз", "Слива"];
+showMas(mas1, mas2);
+function showMas(mas1, mas2){
+    var table = document.getElementById('tab').getElementsByTagName('TBODY')[0];
+    if(mas1.length > mas2.length){
+        for(var i = 0; i < mas1.length; i++){
+            var row = document.createElement('TR');
+            var td1 = document.createElement('TD');
+            td1.appendChild(document.createTextNode(mas1[i]));
+            var td2 = document.createElement('td');
+            var check = document.createElement("input");
+            check.setAttribute("type", "checkbox");
+            check.setAttribute("id", "name");
+            check.setAttribute("value", i);
+            //check.setAttribute("style", "display:none");
+            td2.appendChild(check);
+            var td3 = document.createElement('TD');
+            var td4 = document.createElement('TD');
+            var check2 = document.createElement("INPUT");
+            check2.setAttribute("type", "checkbox");
+            check2.setAttribute("id", "name");
+            check2.setAttribute("value", i);
+            //check2.setAttribute("style", "display:none");
+            if(i == mas2.length){
+                td3.appendChild(document.createTextNode(''));
+                td4.appendChild(document.createTextNode(''));
+            }
+                else{
+                    td3.appendChild(document.createTextNode(mas2[i]));
+                    td4.appendChild(check2);
+            }
+            row.appendChild(td1);
+            row.appendChild(td2);
+            row.appendChild(td3);
+            row.appendChild(td4);
+            table.appendChild(row);
+        }
     }
-	table += '</table>';
-	document.getElementById('result').innerHTML = table;
-}
+    else{
+        for(var i = 0; i < mas2.length; i++){
+            var row = document.createElement('TR');
+            var td1 = document.createElement('TD');
+            var td2 = document.createElement('TD');
+            var check = document.createElement("INPUT");
+            check.setAttribute("type", "checkbox");
+            check.setAttribute("id", "name");
+            check.setAttribute("value", i);
+            //check.setAttribute("style", "display:none");
+            if(i == mas1.length){
+                td1.appendChild(document.createTextNode(''));
+                td2.appendChild(document.createTextNode(''));
+            }
+            else {
+                td1.appendChild(document.createTextNode(mas1[i]));
+                td2.appendChild(check);
+            }
+            var td3 = document.createElement('TD');
+            td3.appendChild(document.createTextNode(mas2[i]));
+            var td4 = document.createElement('TD');
+            var check2 = document.createElement("INPUT");
+            check2.setAttribute("type", "checkbox");
+            check2.setAttribute("id", "name");
+            check2.setAttribute("value", i);
+            //check2.setAttribute("style", "display:none");
+            td4.appendChild(check2);
+            row.appendChild(td1);
+            row.appendChild(td2);
+            row.appendChild(td3);
+            row.appendChild(td4);
+            table.appendChild(row);
+        }
+    }
+}//отображение массива на экране
+function hideMenu(id){
+    var menu = document.getElementById(id).style.display;
+    document.getElementById(id).style.display = (menu == 'none') ? 'block' : 'none';
 
-/*
-1.1 Сравнение двух массивов, вывод соответствующих строк
- */
-function compareMas(mas1, mas2){
-	//var htm = printMas(mas1, mas2);
-	var htm = '<p>';
-	for (var i = 0; i < mas1.length; i++){
-		for(var j = 0; j < mas2.length; j++){
-			if(mas1[i] == mas2[j])
-				htm += 'Совпадение в строках ' + (i + +1) + ' и ' + (j + +1) + ' в слове ' + mas1[i] + '<br/>';
-		}
-	}
-	htm += '</p>';
-	document.getElementById('result2').innerHTML = htm;
-}
+}//скрыть/раскрыть меню
+function addElemOnMas(id, mas){
+    if(id == "butAdd1"){
+        var elem = document.getElementById('addElem').value;
+        if(mas.length < document.getElementById('tab').rows.length - 1){
+            var table = document.getElementById('tab');
+            var row = table.getElementsByTagName('tr');
+            var td = row[mas.length + 1].getElementsByTagName('td');
+            td[0].innerHTML = elem;
+            td[1].innerHTML = '<input type="checkbox" id="name" value="mas.length + 1">';
+        }
+        else{
+            var table = document.getElementById('tab').getElementsByTagName('TBODY')[0];
+            var row = document.createElement('tr');
+            var td1 = document.createElement('td');
+            td1.appendChild(document.createTextNode(elem));
+            var td2 = document.createElement('td');
+            var check = document.createElement("input");
+            check.setAttribute("type", "checkbox");
+            check.setAttribute("id", "name");
+            check.setAttribute("value", mas.length + 1);
+            td2.appendChild(check);
+            row.appendChild(td1);
+            row.appendChild(td2);
+            table.appendChild(row);
+        }
 
-/*
- 1.2 - Сравнение строк в массиве
- Выделение цветов совпадающих строк
- */
-function compareMasColor(mas1, mas2){
+    }
+    else{
+        var elem = document.getElementById('addElem2').value;
+        if(mas.length < document.getElementById('tab').rows.length-1){
+            var table = document.getElementById('tab');
+            var row = table.getElementsByTagName('tr');
+            var td = row[mas.length + 1].getElementsByTagName('td');
+            td[2].innerHTML = elem;
+            td[3].innerHTML = '<input type="checkbox" id="name" value="mas.length + 1">';
 
-	var htm = '<table border = 2><tr>';
-	for (var i = 0, j = 0; i < mas1.length,j < mas2.length; i++, j++){
-		if(mas1[i] == mas2[j]){
-			htm += '<td bgcolor="#EE2C2C">' + mas1[i] + '</td>';
-			htm += '<td bgcolor="#EE2C2C">' + mas2[j] + '</td>';
-		} else{
-			htm += '<td>' + mas1[i] + '</td>';
-			htm += '<td>' + mas2[j] + '</td>';
-		}
-		htm += '</tr>';
-	}
-	htm += '</table>';
-	document.getElementById('result').innerHTML = htm;
-}
+        }
+        else{
+            var table = document.getElementById('tab').getElementsByTagName('TBODY')[0];
+            var row = document.createElement('tr');
+            var td1 = document.createElement('td');
+            td1.appendChild(document.createTextNode(""));
+            var td2 = document.createElement('td');
+            td2.appendChild(document.createTextNode(""));
+            var td3 = document.createElement('td');
+            td3.appendChild(document.createTextNode(elem));
+            var td4 = document.createElement('td');
+            var check = document.createElement("input");
+            check.setAttribute("type", "checkbox");
+            check.setAttribute("id", "name");
+            check.setAttribute("value", mas.length + 1);
+            td4.appendChild(check);
+            row.appendChild(td1);
+            row.appendChild(td2);
+            row.appendChild(td3);
+            row.appendChild(td4);
+            table.appendChild(row);
+        }
+    }
+    mas = mas.push(elem);
+    console.log(mas1);
+    console.log(mas2);
+}//добавление элемента с выводом на экран
 
-/*
-Подготовка страницы к 1.4
-вывод таблицы и под таблицей поле ввода с кнопкой
-*/
-function prevFour(mas1, mas2){
-	var htm = '<p>Ввести символы для поиска в нижнем регистре<br/><input type="text" value="" id="str"><button onclick="findStr(mas1)">ОК</button></p>';
-	document.getElementById('result2').innerHTML = htm;
-}
-
-/*
-1.4 - вывод красным найденных в массиве элементов
- */
-
-function findStr(mas){
-	var srt = document.getElementById('str').value;
-	var i = 0, j = 0, htm = '<p><b>Найденные совпадения<b><br/>';
-	for(i = 0; i < mas.length; i++){
-		for(j = 0; j < mas[i].length; j++){
-			var charLetter = mas[i].charAt(j); //беру текущий символ текущего слова
-			if(srt.indexOf(charLetter.toLowerCase()) == -1) htm += '' + mas[i].charAt(j);//если есть в в поисковой строке то...
-				else htm += '' + mas[i].charAt(j).fontcolor('red');
-		}
-		htm += ' ';
-	}
-	htm += '</p>';
-	document.getElementById('result2').innerHTML = htm;
-}
-
-var mas1 = ['Банан', 'Яблоко', 'Клубника', 'Мандарин', 'Груша', 'Лимон'];
-var mas2 = ['арбуз', 'маракуйя','смородина' , 'клубника', 'земляника', 'груша', 'апельсин', 'слива'];
-printMas(mas1, mas2);
-
-var but1 = document.getElementById('but1');
-but1.addEventListener("click", wrapper(mas1));
-var but2 = document.getElementById('but2');
-but2.addEventListener("click", wrapper3(mas2));
+var butSort1 = document.getElementById('but1');
+butSort1.addEventListener("click", wrapper(mas1));
+var butSort2 = document.getElementById('but2');
+butSort2.addEventListener("click", wrapper3(mas2));
 
 function wrapper(mas){
-	return function sortMas(){
-		var newMas = [];
-		for (var i = 0; i < mas.length; i++)//копирую массив, дабы его не менять
-			newMas[i] = mas[i];
-		newMas = mas.sort();
-		var myTable = document.getElementById('tab');
-		var trList = myTable.getElementsByTagName('tr');
-		for (i = 1; i <= trList.length - 1; i++){
-			var tdList = trList[i].getElementsByTagName('td');
-			for (var j = 0; j < tdList.length; j++){
-				if(j == 0){
-					if(i > newMas.length){
-						tdList[j].innerHTML = '';
-					}
-						else tdList[j].innerHTML = newMas[i - 1];
-				}
-			}
-		}
-		but1.textContent = 'Я-А';
-		but1.removeEventListener("click", wrapper(mas1));
-		but1.addEventListener("click", wrapper2(mas1));
-	}
-}
+    return function sortMas(){
+        mas = mas.sort();
+        var myTable = document.getElementById('tab');
+        var trList = myTable.getElementsByTagName('tr');
+        for (i = 1; i <= trList.length - 1; i++){
+            var tdList = trList[i].getElementsByTagName('td');
+            for (var j = 0; j < tdList.length; j++){
+                if(j == 0){
+                    if(i > mas.length){
+                        tdList[j].innerHTML = '';
+                    }
+                    else tdList[j].innerHTML = mas[i - 1];
+                }
+            }
+        }
+        butSort1.value = 'Я-А';
+        butSort1.removeEventListener("click", wrapper(mas1));
+        butSort1.addEventListener("click", wrapper2(mas1));
+    }
+}//сортировка первого а-я
 
 function wrapper2(mas){
-	return function sortMasRev(){
-		var newMas = [];
-		for (var i = 0; i < mas.length; i++)//копирую массив, дабы его не менять
-			newMas[i] = mas[i];
-		newMas = mas.sort().reverse();
-		var myTable = document.getElementById('tab');
-		var trList = myTable.getElementsByTagName('tr');
-		for (i = 1; i <= trList.length - 1; i++){
-			var tdList = trList[i].getElementsByTagName('td');
-			for (var j = 0; j < tdList.length; j++){
-				if(j == 0){
-					if(i > newMas.length){
-						tdList[j].innerHTML = '';
-					}
-						else tdList[j].innerHTML = newMas[i - 1];
-				}
-			}
-		}
-		but1.textContent = 'А-Я';
-		but1.removeEventListener("click", wrapper2(mas));
-		but1.addEventListener("click", wrapper(mas));
-	}
-}
+    return function sortMasRev(){
+        mas = mas.sort().reverse();
+        var myTable = document.getElementById('tab');
+        var trList = myTable.getElementsByTagName('tr');
+        for (i = 1; i <= trList.length - 1; i++){
+            var tdList = trList[i].getElementsByTagName('td');
+            for (var j = 0; j < tdList.length; j++){
+                if(j == 0){
+                    if(i > mas.length){
+                        tdList[j].innerHTML = '';
+                    }
+                    else tdList[j].innerHTML = mas[i - 1];
+                }
+            }
+        }
+        butSort1.value = 'А-Я';
+        butSort1.removeEventListener("click", wrapper2(mas));
+        butSort1.addEventListener("click", wrapper(mas));
+    }
+}//сортировка первого я-а
 
 function wrapper3(mas){
-	return function sortMas(){
-		var newMas = [];
-		for (var i = 0; i < mas.length; i++)//копирую массив, дабы его не менять
-			newMas[i] = mas[i];
-		newMas = mas.sort();
-		var myTable = document.getElementById('tab');
-		var trList = myTable.getElementsByTagName('tr');
-		for (i = 1; i <= trList.length - 1; i++){
-			var tdList = trList[i].getElementsByTagName('td');
-			for (var j = 0; j < tdList.length; j++){
-				if(j == 1) tdList[j].innerHTML = newMas[i - 1];
-			}
-		}
-		but2.textContent = 'Я-А';
-		but2.removeEventListener("click", wrapper3(mas));
-		but2.addEventListener("click", wrapper4(mas));
-	}
-}
+    return function sortMas(){
+        mas = mas.sort();
+        var myTable = document.getElementById('tab');
+        var trList = myTable.getElementsByTagName('tr');
+        for (i = 1; i <= trList.length - 1; i++){
+            var tdList = trList[i].getElementsByTagName('td');
+            for (var j = 0; j < tdList.length; j++){
+                if(j == 2)
+                    if(i > mas.length)tdList[j].innerHTML = '';
+                else tdList[j].innerHTML = mas[i - 1];
+            }
+
+        }
+        butSort2.value = 'Я-А';
+        butSort2.removeEventListener("click", wrapper3(mas));
+        butSort2.addEventListener("click", wrapper4(mas));
+    }
+}//сортировка второго а-я
 
 function wrapper4(mas){
-	return function sortMasRev(){
-		var newMas = [];
-		for (var i = 0; i < mas.length; i++)//копирую массив, дабы его не менять
-			newMas[i] = mas[i];
-		newMas = mas.sort().reverse();
-		var myTable = document.getElementById('tab');
-		var trList = myTable.getElementsByTagName('tr');
-		for (i = 1; i <= trList.length - 1; i++){
-			var tdList = trList[i].getElementsByTagName('td');
-			for (var j = 0; j < tdList.length; j++){
-				if(j == 1) tdList[j].innerHTML = newMas[i - 1];
-			}
-		}
-		but2.textContent = 'А-Я';
-		but2.removeEventListener("click", wrapper4(mas));
-		but2.addEventListener("click", wrapper3(mas));
-	}
+    return function sortMasRev(){
+        mas = mas.sort().reverse();
+        var myTable = document.getElementById('tab');
+        var trList = myTable.getElementsByTagName('tr');
+        for (i = 1; i <= trList.length - 1; i++){
+            var tdList = trList[i].getElementsByTagName('td');
+            for (var j = 0; j < tdList.length; j++){
+                if(j == 2)
+                    if(i > mas.length)tdList[j].innerHTML = '';
+                    else tdList[j].innerHTML = mas[i - 1];
+            }
+        }
+        butSort2.value = 'А-Я';
+        butSort2.removeEventListener("click", wrapper4(mas));
+        butSort2.addEventListener("click", wrapper3(mas));
+    }
+}//сортировка второго я-а
+
+function clearMas(id, mas){//очистка массива
+    if(id == "butClear1"){
+        mas.length = 0;//очистил массив
+        //теперь выводим его(очищаем столбец)
+        var table = document.getElementById('tab');
+        var rowList = table.getElementsByTagName('tr');
+        for(var i = 1; i < rowList.length; i++){
+            var colList = rowList[i].getElementsByTagName('td');
+            for(var j = 0; j <= 1; j++){
+                colList[j].innerHTML = '';
+            }
+        }
+        document.getElementById('checkClear').checked = '';
+        hideMenu('menuClear');
+    }
+    else{
+        if(id == "butClear2"){
+            mas.length = 0;//очистил массив
+            //теперь выводим его(очищаем столбец)
+            var table = document.getElementById('tab');
+            var rowList = table.getElementsByTagName('tr');
+            for(var i = 1; i < rowList.length; i++){
+                var colList = rowList[i].getElementsByTagName('td');
+                for(var j = 2; j <= 3; j++){
+                    colList[j].innerHTML = '';
+                }
+            }
+        }
+        document.getElementById('check2Clear').checked = '';
+        hideMenu('menu2Clear');
+    }
 }
+
+function f() {
+    
+}
+
