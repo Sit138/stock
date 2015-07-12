@@ -3,6 +3,7 @@ var mas2 = ["Груша", "Вишня", "Арбуз", "Слива"];
 showMas(mas1, mas2);
 function showMas(mas1, mas2){
     var table = document.getElementById('tab').getElementsByTagName('TBODY')[0];
+    //First array
     if(mas1.length > mas2.length){
         for(var i = 0; i < mas1.length; i++){
             var row = document.createElement('TR');
@@ -11,17 +12,19 @@ function showMas(mas1, mas2){
             var td2 = document.createElement('td');
             var check = document.createElement("input");
             check.setAttribute("type", "checkbox");
-            check.setAttribute("id", "name");
+            check.setAttribute("id", "cb"+i);
             check.setAttribute("value", i);
-            //check.setAttribute("style", "display:none");
+            check.setAttribute("style", "display:none");
+            check.setAttribute("style", "visibility:visible");
             td2.appendChild(check);
             var td3 = document.createElement('TD');
             var td4 = document.createElement('TD');
             var check2 = document.createElement("INPUT");
             check2.setAttribute("type", "checkbox");
-            check2.setAttribute("id", "name");
+            check2.setAttribute("id", "cb1"+i);
             check2.setAttribute("value", i);
-            //check2.setAttribute("style", "display:none");
+            check2.setAttribute("style", "display:none");
+            check.setAttribute("style", "visibility:visible");
             if(i == mas2.length){
                 td3.appendChild(document.createTextNode(''));
                 td4.appendChild(document.createTextNode(''));
@@ -37,6 +40,7 @@ function showMas(mas1, mas2){
             table.appendChild(row);
         }
     }
+    //Second array
     else{
         for(var i = 0; i < mas2.length; i++){
             var row = document.createElement('TR');
@@ -44,9 +48,9 @@ function showMas(mas1, mas2){
             var td2 = document.createElement('TD');
             var check = document.createElement("INPUT");
             check.setAttribute("type", "checkbox");
-            check.setAttribute("id", "name");
+            check.setAttribute("id", "cb"+i);
             check.setAttribute("value", i);
-            //check.setAttribute("style", "display:none");
+            check.setAttribute("style", "display:none");
             if(i == mas1.length){
                 td1.appendChild(document.createTextNode(''));
                 td2.appendChild(document.createTextNode(''));
@@ -60,9 +64,9 @@ function showMas(mas1, mas2){
             var td4 = document.createElement('TD');
             var check2 = document.createElement("INPUT");
             check2.setAttribute("type", "checkbox");
-            check2.setAttribute("id", "name");
+            check2.setAttribute("id", "cb1"+i);
             check2.setAttribute("value", i);
-            //check2.setAttribute("style", "display:none");
+            check2.setAttribute("style", "display:none");
             td4.appendChild(check2);
             row.appendChild(td1);
             row.appendChild(td2);
@@ -77,15 +81,21 @@ function hideMenu(id){
     document.getElementById(id).style.display = (menu == 'none') ? 'block' : 'none';
 
 }//скрыть/раскрыть меню
-function addElemOnMas(id, mas){
+function addElemOnMas(id, mas){//добавление элемента с выводом на экран
     if(id == "butAdd1"){
+        //First array
         var elem = document.getElementById('addElem').value;
         if(mas.length < document.getElementById('tab').rows.length - 1){
             var table = document.getElementById('tab');
             var row = table.getElementsByTagName('tr');
             var td = row[mas.length + 1].getElementsByTagName('td');
             td[0].innerHTML = elem;
-            td[1].innerHTML = '<input type="checkbox" id="name" value="mas.length + 1">';
+            var check = document.createElement("input");
+            check.setAttribute("type", "checkbox");
+            check.setAttribute("id", "cb" + (mas.length));
+            check.setAttribute("value", mas.length + 1);
+            check.setAttribute("style", "display:none");
+            td[1].appendChild(check);
         }
         else{
             var table = document.getElementById('tab').getElementsByTagName('TBODY')[0];
@@ -95,8 +105,9 @@ function addElemOnMas(id, mas){
             var td2 = document.createElement('td');
             var check = document.createElement("input");
             check.setAttribute("type", "checkbox");
-            check.setAttribute("id", "name");
+            check.setAttribute("id", "cb" + (mas.length));
             check.setAttribute("value", mas.length + 1);
+            check.setAttribute("style", "display:none");
             td2.appendChild(check);
             row.appendChild(td1);
             row.appendChild(td2);
@@ -104,6 +115,7 @@ function addElemOnMas(id, mas){
         }
 
     }
+    //Second array
     else{
         var elem = document.getElementById('addElem2').value;
         if(mas.length < document.getElementById('tab').rows.length-1){
@@ -111,8 +123,13 @@ function addElemOnMas(id, mas){
             var row = table.getElementsByTagName('tr');
             var td = row[mas.length + 1].getElementsByTagName('td');
             td[2].innerHTML = elem;
-            td[3].innerHTML = '<input type="checkbox" id="name" value="mas.length + 1">';
-
+            //td[3].innerHTML = '<input type="checkbox" id="name" value="mas.length + 1">';
+            var check = document.createElement("input");
+            check.setAttribute("type", "checkbox");
+            check.setAttribute("id", "cb1" + (mas.length));
+            check.setAttribute("value", mas.length + 1);
+            check.setAttribute("style", "display:none");
+            td[3].appendChild(check);
         }
         else{
             var table = document.getElementById('tab').getElementsByTagName('TBODY')[0];
@@ -126,8 +143,9 @@ function addElemOnMas(id, mas){
             var td4 = document.createElement('td');
             var check = document.createElement("input");
             check.setAttribute("type", "checkbox");
-            check.setAttribute("id", "name");
+            check.setAttribute("id", "cb1" + (mas.length));
             check.setAttribute("value", mas.length + 1);
+            check.setAttribute("style", "display:none");
             td4.appendChild(check);
             row.appendChild(td1);
             row.appendChild(td2);
@@ -139,12 +157,13 @@ function addElemOnMas(id, mas){
     mas = mas.push(elem);
     console.log(mas1);
     console.log(mas2);
-}//добавление элемента с выводом на экран
+}
 
 var butSort1 = document.getElementById('but1');
 butSort1.addEventListener("click", wrapper(mas1));
 var butSort2 = document.getElementById('but2');
 butSort2.addEventListener("click", wrapper3(mas2));
+
 
 function wrapper(mas){
     return function sortMas(){
@@ -167,7 +186,6 @@ function wrapper(mas){
         butSort1.addEventListener("click", wrapper2(mas1));
     }
 }//сортировка первого а-я
-
 function wrapper2(mas){
     return function sortMasRev(){
         mas = mas.sort().reverse();
@@ -189,7 +207,6 @@ function wrapper2(mas){
         butSort1.addEventListener("click", wrapper(mas));
     }
 }//сортировка первого я-а
-
 function wrapper3(mas){
     return function sortMas(){
         mas = mas.sort();
@@ -209,7 +226,6 @@ function wrapper3(mas){
         butSort2.addEventListener("click", wrapper4(mas));
     }
 }//сортировка второго а-я
-
 function wrapper4(mas){
     return function sortMasRev(){
         mas = mas.sort().reverse();
@@ -228,7 +244,6 @@ function wrapper4(mas){
         butSort2.addEventListener("click", wrapper3(mas));
     }
 }//сортировка второго я-а
-
 function clearMas(id, mas){//очистка массива
     if(id == "butClear1"){
         mas.length = 0;//очистил массив
@@ -261,8 +276,123 @@ function clearMas(id, mas){//очистка массива
         hideMenu('menu2Clear');
     }
 }
-
-function f() {
-    
+function deleteElemWithArray(id){
+        var count = 0;
+        if(id == 1){
+            for(var i = 0; i < mas1.length; i++){
+                document.getElementById('cb'+i).style.display = "";
+            }
+            var butDelElem = document.getElementById('butDelElem1');
+            butDelElem.style.display = "";
+            butDelElem.addEventListener("click", deleteElem(mas1));
+        }
+        else{
+            for(var i = 0; i < mas2.length; i++){
+                document.getElementById('cb1'+i).style.display = "";
+            }
+            var butDelElem = document.getElementById('butDelElem2');
+            butDelElem.style.display = "";
+            butDelElem.addEventListener("click", deleteElem(mas2));
+        }
 }
+function deleteElem(mas){
+    return function fun(){
+        var checkMas = [];
+        var j = 0;
+        if(mas == mas1){
+            /*Получаем массив индексов, где checked == true*/
+            for(var i = 0; i < mas.length; i++){
+                if(document.getElementById('cb'+i).checked){
+                    checkMas[j] = i;
+                    j++;
+                }
+            }
+            delEl(mas, checkMas);//удаляем все элементы, у которых индексы равны checkMas[i]
+            //сразу выводим на экран
+            var table = document.getElementById('tab');
+            var rowList = table.getElementsByTagName('tr');
+            for(var i = 1; i < rowList.length; i++){
+                var colList = rowList[i].getElementsByTagName('td');
+                for(var j = 0; j <= 1; j++){
+                    colList[j].innerHTML = '';
+                }
+            }
+            var trList = table.getElementsByTagName('tr');
+            for (i = 1; i <= trList.length - 1; i++){
+                var tdList = trList[i].getElementsByTagName('td');
+                for (var j = 0; j < 1; j++){
+                        if(i > mas.length){
+                            tdList[0].innerHTML = '';
+                        }
+                        else {
+                            tdList[0].innerHTML = mas[i - 1];
+                            var check = document.createElement("input");
+                            check.setAttribute("type", "checkbox");
+                            check.setAttribute("id", "cb"+i);
+                            check.setAttribute("value", mas.length + 1);
+                            check.setAttribute("style", "display:none");
+                            tdList[1].appendChild(check);
+                        }
 
+                }
+            }
+            var check = document.getElementById('checkDelEl');
+            check.checked = false;
+        }
+        else{
+            for(var i = 0; i < mas.length; i++){
+                if(document.getElementById('cb1'+i).checked){
+                    checkMas[j] = i;
+                    j++;
+                }
+            }
+            delEl(mas, checkMas);
+            var table = document.getElementById('tab');
+            var rowList = table.getElementsByTagName('tr');
+            for(var i = 1; i < rowList.length; i++){
+                var colList = rowList[i].getElementsByTagName('td');
+                for(var j = 2; j <= 3; j++){
+                    colList[j].innerHTML = '';
+                }
+            }
+            var trList = table.getElementsByTagName('tr');
+            for (i = 1; i <= trList.length - 1; i++){
+                var tdList = trList[i].getElementsByTagName('td');
+                for (var j = 0; j < 1; j++){
+                    if(i > mas.length){
+                        tdList[2].innerHTML = '';
+                    }
+                    else {
+                        tdList[2].innerHTML = mas[i - 1];
+                        var check = document.createElement("input");
+                        check.setAttribute("type", "checkbox");
+                        check.setAttribute("id", "cb"+i);
+                        check.setAttribute("value", mas.length + 1);
+                        check.setAttribute("style", "display:none");
+                        tdList[3].appendChild(check);
+                    }
+
+                }
+            }
+        }
+    }
+}
+function delEl(mas, masCheck){
+    var checkMas = masCheck;
+    var j = 0;
+    do{
+        for(var i = 0; i < mas.length; i++){
+            if(i == checkMas[j]){
+                var k = j+1;
+                for(k; k < checkMas.length; k++){
+                    checkMas[k]--;
+                }
+                mas.splice(i, 1);
+                i--;
+                break;
+            }
+        }
+        j++;
+    }while(j != checkMas.length);
+    console.log(mas);
+}

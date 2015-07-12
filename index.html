@@ -12,6 +12,8 @@
     <tbody>
     </tbody>
 </table>
+<input type="button" style="display: none" value="Удалить" id="butDelElem1">
+<input type="button" style="display: none" value="Удалить" id="butDelElem2">
 <script src="action.js"></script>
 <p>
 <a href="#" onclick="hideMenu('menu1'); return false">Работа с массивом 1</a>
@@ -23,7 +25,7 @@
                 <input type="text" id="addElem" class="addTExt"/><input type="button" id="butAdd1" onclick="addElemOnMas('butAdd1', mas1)" value="Добавить">
             </form>
         </div>
-        <input type="checkbox" name="a"/>Удалить элемент<br/>
+        <input type="checkbox" name="a" id="checkDelEl1" onclick="deleteElemWithArray(1)"/>Удалить элемент<br/>
         <input type="checkbox" name="a" id="checkClear" onclick="hideMenu('menuClear')"/>Очистить массив<br/>
         <div id="menuClear" style="display: none">
             <form class="formShow">
@@ -49,7 +51,7 @@
                 <input type="text" id="addElem2" class="addTExt"/><input type="button" id="butAdd2" onclick="addElemOnMas('butAdd2',mas2)"  value="Добавить">
             </form>
         </div>
-        <input type="checkbox" name="a"/>Удалить элемент<br/>
+        <input type="checkbox" name="a" onclick="deleteElemWithArray(2)"/>Удалить элемент<br/>
         <input type="checkbox" name="a" id="check2Clear" onclick="hideMenu('menu2Clear')"/>Очистить массив<br/>
         <div id="menu2Clear" style="display: none">
             <form class="formShow">
@@ -64,7 +66,5 @@
     </form>
 </div>
 </p>
-
-<input type="button" onclick="f()">
 </body>
 </html>
