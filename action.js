@@ -1,5 +1,5 @@
 ﻿var mas1 = ["Яблоко", "Груша", "Банан"];
-var mas2 = ["Груша", "Вишня", "Арбуз", "Слива"];
+var mas2 = ["груша", "вишня", "арбуз", "слива"];
 showMas(mas1, mas2);
 function showMas(mas1, mas2){
     var table = document.getElementById('tab').getElementsByTagName('TBODY')[0];
@@ -15,7 +15,6 @@ function showMas(mas1, mas2){
             check.setAttribute("id", "cb"+i);
             check.setAttribute("value", i);
             check.setAttribute("style", "display:none");
-            check.setAttribute("style", "visibility:visible");
             td2.appendChild(check);
             var td3 = document.createElement('TD');
             var td4 = document.createElement('TD');
@@ -24,7 +23,6 @@ function showMas(mas1, mas2){
             check2.setAttribute("id", "cb1"+i);
             check2.setAttribute("value", i);
             check2.setAttribute("style", "display:none");
-            check.setAttribute("style", "visibility:visible");
             if(i == mas2.length){
                 td3.appendChild(document.createTextNode(''));
                 td4.appendChild(document.createTextNode(''));
@@ -105,12 +103,18 @@ function addElemOnMas(id, mas){//добавление элемента с выв
             var td2 = document.createElement('td');
             var check = document.createElement("input");
             check.setAttribute("type", "checkbox");
-            check.setAttribute("id", "cb" + (mas.length));
+            check.setAttribute("id", "cb1" + (mas.length));
             check.setAttribute("value", mas.length + 1);
             check.setAttribute("style", "display:none");
             td2.appendChild(check);
+            var td3 = document.createElement('td');
+            td3.appendChild(document.createTextNode(""));
+            var td4 = document.createElement('td');
+            td4.appendChild(document.createTextNode(""));
             row.appendChild(td1);
             row.appendChild(td2);
+            row.appendChild(td3);
+            row.appendChild(td4);
             table.appendChild(row);
         }
 
@@ -333,11 +337,11 @@ function deleteElem(mas){
                             check.setAttribute("style", "display:none");
                             tdList[1].appendChild(check);
                         }
-
                 }
             }
             var check = document.getElementById('checkDelEl');
             check.checked = false;
+            check.removeEventListener("click", deleteElemWithArray(1));
         }
         else{
             for(var i = 0; i < mas.length; i++){
@@ -395,4 +399,47 @@ function delEl(mas, masCheck){
         j++;
     }while(j != checkMas.length);
     console.log(mas);
+}
+function compareMas(mas1, mas2){
+    //var htm = printMas(mas1, mas2);
+    var htm = '<p>';
+    var arr1 = [];
+    var arr2 = [];
+    for(var i = 0; i < mas1.length; i++){
+        arr1[i] = mas1[i].toUpperCase();
+
+    }
+    for(var j = 0; j < mas2.length; j++)
+        arr2[j] = mas2[j].toUpperCase();
+    for ( i = 0; i < mas1.length; i++){
+        for( j = 0; j < mas2.length; j++){
+            if(arr1[i] == arr2[j])
+                htm += 'Совпадение в строках ' + (i + +1) + ' и ' + (j + +1) + ' в слове ' + mas1[i] + '<br/>';
+        }
+    }
+    htm += '</p>';
+    document.getElementById('result').innerHTML = htm;
+}
+function findStr(mas1, mas2){
+    var srt = document.getElementById('str').value;
+    var i = 0, j = 0, htm = '<p><b>Найденные совпадения в массиве 1<b><br/>';
+    for(i = 0; i < mas1.length; i++){
+        for(j = 0; j < mas1[i].length; j++){
+            var charLetter = mas1[i].charAt(j); //беру текущий символ текущего слова
+            if(srt.indexOf(charLetter.toLowerCase()) == -1) htm += '' + mas1[i].charAt(j);//если есть в в поисковой строке то...
+            else htm += '' + mas1[i].charAt(j).fontcolor('red');
+        }
+        htm += ' ';
+    }
+    htm += '</p><p><b>Найденные совпадения в массиве 2<b><br/>';
+    for(i = 0; i < mas2.length; i++){
+        for(j = 0; j < mas2[i].length; j++){
+            var charLetter = mas2[i].charAt(j); //беру текущий символ текущего слова
+            if(srt.indexOf(charLetter.toLowerCase()) == -1) htm += '' + mas2[i].charAt(j);//если есть в в поисковой строке то...
+            else htm += '' + mas2[i].charAt(j).fontcolor('red');
+        }
+        htm += ' ';
+    }
+    htm += '</p>';
+    document.getElementById('result3').innerHTML = htm;
 }

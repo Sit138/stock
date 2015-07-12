@@ -5,7 +5,7 @@
     <title>Result</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<p>
 <table border="0" id="tab">
     <tr><th colspan="2"><input type="button" id="but1" value="А-Я"></th>
         <th colspan="2"><input type="button" id="but2" value="А-Я"></th></tr>
@@ -66,5 +66,14 @@
     </form>
 </div>
 </p>
+
+<p><input type="button" value="Сравнить массивы" onclick="compareMas(mas1, mas2)"><div id="result"></div></p>
+
+<p><input type="button" value="Поиск символов в массивах" onclick="hideMenu('result2')">
+    <div id="result2" style="display: none">
+        <input type="text" id="str"><input type="button" onclick="findStr(mas1, mas2)" value="Поиск"></p>
+        <p>
+            <div id="result3"></div></div>
+        </p>
 </body>
 </html>
