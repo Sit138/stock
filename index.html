@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <p>
-<table border="0" id="tab">
-    <tr><th colspan="2"><input type="button" id="but1" value="А-Я"></th>
-        <th colspan="2"><input type="button" id="but2" value="А-Я"></th></tr>
+<table border="2" id="tab">
+    <tr><th colspan="2"><input type="button" id="but1" value="А-Я" class="but"></th>
+        <th colspan="2"><input type="button" id="but2" value="А-Я" class="but"></th></tr>
     <tbody>
     </tbody>
 </table>
-<input type="button" style="display: none" value="Удалить" id="butDelElem1">
-<input type="button" style="display: none" value="Удалить" id="butDelElem2">
+<input type="button" style="display: none" value="Удалить" id="butDelElem1" class="but">
+<input type="button" style="display: none" value="Удалить" id="butDelElem2" class="but">
 <script src="action.js"></script>
 <p>
 <a href="#" onclick="hideMenu('menu1'); return false">Работа с массивом 1</a>
@@ -22,7 +22,8 @@
         <input type="checkbox" onclick="hideMenu('menuAdd')" name="a"/>Добавить элемент<br/>
         <div id="menuAdd" style="display: none">
             <form>
-                <input type="text" id="addElem" class="addTExt"/><input type="button" id="butAdd1" onclick="addElemOnMas('butAdd1', mas1)" value="Добавить">
+                <input type="text" id="addElem" class="addTExt"/>
+                <input type="button" id="butAdd1" onclick="addElemOnMas('butAdd1', mas1)" value="Добавить" class="but"/>
             </form>
         </div>
         <input type="checkbox" name="a" id="checkDelEl1" onclick="deleteElemWithArray(1)"/>Удалить элемент<br/>
@@ -32,8 +33,8 @@
                 <fieldset style="width: 150px">
                     <legend></legend>
                     Вы уверены, что хотите очистить массив?<br/>
-                    <input type="button" value="Да" id="butClear1" onclick="clearMas('butClear1', mas1)">
-                    <input type="button" value="Отмена" onclick="hideMenu('menuClear')">
+                    <input type="button" value="Да" id="butClear1" onclick="clearMas('butClear1', mas1)" class="but">
+                    <input type="button" value="Отмена" onclick="hideMenu('menuClear')" class="but">
                 </fieldset>
             </form>
         </div>
@@ -48,18 +49,19 @@
         <input type="checkbox" onclick="hideMenu('menu2Add')" name="a"/>Добавить элемент<br/>
         <div id="menu2Add" style="display: none">
             <form>
-                <input type="text" id="addElem2" class="addTExt"/><input type="button" id="butAdd2" onclick="addElemOnMas('butAdd2',mas2)"  value="Добавить">
+                <input type="text" id="addElem2" class="addTExt"/>
+                <input type="button" id="butAdd2" onclick="addElemOnMas('butAdd2',mas2)"  value="Добавить" class="but">
             </form>
         </div>
         <input type="checkbox" name="a" onclick="deleteElemWithArray(2)"/>Удалить элемент<br/>
         <input type="checkbox" name="a" id="check2Clear" onclick="hideMenu('menu2Clear')"/>Очистить массив<br/>
         <div id="menu2Clear" style="display: none">
-            <form class="formShow">
+            <form class="formShow" style="text-align: center; margin: auto">
                 <fieldset style="width: 150px">
                     <legend></legend>
                     Вы уверены, что хотите очистить массив?<br/>
-                    <input type="button" value="Да" id="butClear2" onclick="clearMas('butClear2', mas2)">
-                    <input type="button" value="Отмена" onclick="hideMenu('menu2Clear')">
+                    <input type="button" value="Да" id="butClear2" onclick="clearMas('butClear2', mas2)" class="but">
+                    <input type="button" value="Отмена" onclick="hideMenu('menu2Clear')" class="but">
                 </fieldset>
             </form>
         </div>
@@ -67,11 +69,16 @@
 </div>
 </p>
 
-<p><input type="button" value="Сравнить массивы" onclick="compareMas(mas1, mas2)"><div id="result"></div></p>
+<p>
+    <input type="button" value="Сравнить массивы" onclick="compareMas(mas1, mas2)" class="but">
+    <div id="result"></div>
+</p>
 
-<p><input type="button" value="Поиск символов в массивах" onclick="hideMenu('result2')">
+<p>
+    <input type="button" value="Поиск символов" onclick="hideMenu('result2')" class="but">
     <div id="result2" style="display: none">
-        <input type="text" id="str"><input type="button" onclick="findStr(mas1, mas2)" value="Поиск"></p>
+        <input type="text" id="str">
+        <input type="button" onclick="findStr(mas1, mas2)" value="Поиск" class="but">
         <p>
             <div id="result3"></div></div>
         </p>

@@ -1,8 +1,10 @@
 a{
+    background: linear-gradient(to top, #87CEFA 10%, #ADD8E6 50%, #E0FFFF 100%);
+    font-size: 14px;
+    padding: 5px 10px;
     color: black;
-    background-color: white;
-    font-size: large;
-    font-family: fantasy;
+    border: 1px solid #333;
+    border-radius: 5px;
 }
 .addTExt{
     color: black;
@@ -11,4 +13,21 @@ a{
 .formShow{
     background-color: red;
     width: 180px;
+}
+.but{
+    height: 40px;
+    background: linear-gradient(to top, #87CEFA 10%, #ADD8E6 50%, #E0FFFF 100%);
+    font-size: 14px; /* Размер шрифта */
+    padding: 10px 20px; /* Поля вокруг текста */
+    color: black; /* Цвет текста */
+    border: 1px solid #333; /* Параметры рамки */
+    border-radius: 5px; /* Радиус скругления */
+}
+body{
+    text-align: center;
+    background-color: snow;
+}
+
+table{
+    margin: auto;
 }
