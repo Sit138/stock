@@ -1,7 +1,8 @@
-﻿var mas1 = ["Яблоко", "Груша", "Банан"],
+﻿var mas1 = ["Яблоко", "Груша", "Апельсин","Банан"],
     mas2 = ["груша", "вишня", "арбуз", "слива"];
 
 printMas(mas1, mas2);
+
 function printMas(mas1, mas2){//перерисовка данных таблицы
     var htm = '<table id="tab" border="2">',
         i,
@@ -36,17 +37,16 @@ function printMas(mas1, mas2){//перерисовка данных таблиц
     document.getElementById('tab').innerHTML = htm;
 }
 
-function hideMenu(id){//раскрытие меню
+function hideMenu(id){//скрыть/раскрыть меню
     var menu = document.getElementById(id).style.display;
     document.getElementById(id).style.display = (menu == 'none') ? 'block' : 'none';
     if(id != 'menuAdd' && document.getElementById('menuAdd').style.display == 'block') {
         document.getElementById('menuAdd').style.display = 'none';
     }
-
-}//скрыть/раскрыть меню
+}
 
 function addElemInMas(mas){
-    var elem = (mas == mas1) ? document.getElementById('addElem').value : document.getElementById('addElem2').value
+    var elem = (mas == mas1) ? document.getElementById('addElem').value : document.getElementById('addElem2').value;
     mas.push(elem);
     printMas(mas1, mas2);//вывод на экран
 }
@@ -55,43 +55,47 @@ function clearMas(mas){//очистка массива
     mas.length = 0;
     printMas(mas1, mas2);
 }
-/*
-var butSort1 = document.getElementById('but1'),
-    butSort2 = document.getElementById('but2');
-butSort1.addEventListener("click", wrapper(mas1));
-butSort2.addEventListener("click", wrapper(mas2));*/
+
+function compare(mas1, mas2) {//сравнение двух массивов
+    if (mas1.length !== mas2.length) {
+        return false;
+    }
+    return mas2.join(',') === mas1.join(',');
+}
 
 function sortMas(mas){
-    var button1 = document.getElementById('but1'),
-        button2 = document.getElementById('but2'),
-        arr = [];
+    var arr = [],
+        id = (mas == mas1) ? 'but1' : 'but2';
     for(var i = 0; i < mas.length; i++){
         arr[i] = mas[i];
     }
     arr = arr.sort();
-    if (mas == arr.sort()) {
-        mas = mas.sort();
+    if (compare(mas, arr)) {
+        mas = mas.sort().reverse();
         printMas(mas1, mas2);
-        button1.value = 'А-Я';
+        document.getElementById(id).value = "А-Я";
+        console.log(arr);
         console.log(mas);
     }
     else {
-        mas = mas.reverse();
+        mas = mas.sort();
         printMas(mas1, mas2);
-        button1.value = 'Я-А';
+        document.getElementById(id).value = "Я-А";
+        console.log(arr);
         console.log(mas);
     }
+
 }
 
 function deleteElemWithArray(id){
         var count = 0, i, butDelElem;
-        if(id == 1){
+        if(id == 1) {
             for(i = 0; i < mas1.length; i++){
                 document.getElementById('cb'+i).style.display = "";
             }
             document.getElementById('butDelElem1').style.display = "";
-        }//второй массив не нужно рассматривать пока
-        else{
+        }
+        else {
             for(i = 0; i < mas2.length; i++){
                 document.getElementById('cb1'+i).style.display = "";
             }
@@ -102,7 +106,7 @@ function deleteElemWithArray(id){
 function deleteElem(mas){
         var checkMas = [];
         var j = 0;
-        if(mas == mas1){
+        if(mas == mas1) {
             for(var i = 0; i < mas.length; i++){
                 if(document.getElementById('cb'+i).checked){
                     checkMas[j] = i;
@@ -111,6 +115,7 @@ function deleteElem(mas){
             }
             delElement(mas, checkMas);//удаляем все элементы, у которых индексы равны checkMas[i]
             printMas(mas1, mas2);
+            document.getElementById('checkDelEl1').checked = false;
         }
         else  { //второй массив
             for(var i = 0; i < mas.length; i++){
@@ -121,6 +126,7 @@ function deleteElem(mas){
             }
             delElement(mas, checkMas);
             printMas(mas1, mas2);
+            document.getElementById('checkDelEl2').checked = false;
         }
 }
 
@@ -128,10 +134,10 @@ function delElement(mas, masCheck){//принимает сходный масс�
     var checkMas = masCheck;
     var j = 0;
     do{
-        for(var i = 0; i < mas.length; i++){
-            if(i == checkMas[j]){
+        for(var i = 0; i < mas.length; i++) {
+            if(i == checkMas[j]) {
                 var k = j+1;
-                for(k; k < checkMas.length; k++){
+                for(k; k < checkMas.length; k++) {
                     checkMas[k]--;
                 }
                 mas.splice(i, 1);
@@ -140,20 +146,20 @@ function delElement(mas, masCheck){//принимает сходный масс�
             }
         }
         j++;
-    }while(j != checkMas.length);
+    } while(j != checkMas.length);
     console.log(mas);
 }
 
 function compareMas(mas1, mas2){
-    //var htm = printMas(mas1, mas2);
-    var htm = '<p>';
-    var arr1 = [];
-    var arr2 = [];
-    for(var i = 0; i < mas1.length; i++){
+    var htm = '<p>',
+        arr1 = [],
+        arr2 = [],
+        i, j;
+    for(i = 0; i < mas1.length; i++){
         arr1[i] = mas1[i].toUpperCase();
 
     }
-    for(var j = 0; j < mas2.length; j++)
+    for(j = 0; j < mas2.length; j++)
         arr2[j] = mas2[j].toUpperCase();
     for ( i = 0; i < mas1.length; i++){
         for( j = 0; j < mas2.length; j++){
