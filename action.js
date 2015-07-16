@@ -231,16 +231,15 @@ function compareMas(mas1, mas2){
 
 function findCharToMas(mas){//поиск символов в массиве
     var srt = document.getElementById('str').value,
-        i = 0, j = 0, charLetter,
-        htm = '<p><b>Найденные совпадения в массиве 1<b><br/>';
-    for(i = 0; i < mas1.length; i++){
-        for (j = 0; j < mas1[i].length; j++){
-            charLetter = mas1[i].charAt(j); //беру текущий символ текущего слова
+        i = 0, j = 0, charLetter, htm = '<p>';
+    for(i = 0; i < mas.length; i++){
+        for (j = 0; j < mas[i].length; j++){
+            charLetter = mas[i].charAt(j); //беру текущий символ текущего слова
             if (srt.indexOf(charLetter.toLowerCase()) == -1) {
-                htm += '' + mas1[i].charAt(j);
+                htm += '' + mas[i].charAt(j);
             }//если есть в в поисковой строке то...
             else {
-                htm += '' + mas1[i].charAt(j).fontcolor('red');
+                htm += '' + mas[i].charAt(j).fontcolor('red');
             }
         }
         htm += ' ';
@@ -250,7 +249,9 @@ function findCharToMas(mas){//поиск символов в массиве
 }
 
 function findStr(mas1, mas2){
-    var htm = findCharToMas(mas1);//ищем символы в первом массиве и добавляем к htm
+    var htm = '<p><b>Найденные совпадения в массиве 1<b><br/></p>';
+    htm += findCharToMas(mas1);//ищем символы в первом массиве и добавляем к htm
+    htm += '<p><p>Найденные совпадения в массиве 2<b><br/></b></p>';
     htm += findCharToMas(mas2);
     document.getElementById('result3').innerHTML = htm;
 }
