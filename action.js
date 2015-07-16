@@ -1,5 +1,5 @@
-﻿var mas1 = ["Яблоко", "Груша", "Банан"];
-var mas2 = ["груша", "вишня", "арбуз", "слива"];
+﻿var mas1 = ["Яблоко", "Груша", "Банан"],
+    mas2 = ["груша", "вишня", "арбуз", "слива"];
 
 printMas(mas1, mas2);
 function printMas(mas1, mas2){//перерисовка данных таблицы
@@ -9,8 +9,8 @@ function printMas(mas1, mas2){//перерисовка данных таблиц
         tabLength = (mas1Length > mas2Length) ? mas1Length : mas2Length,//количество строк таблицы
         tabMin = (mas1Length < mas2Length) ? mas1Length : mas2Length;//строка где массивы равны
 
-    htm += '<tr><th colspan="2"><input type="button" id="but1" value="А-Я" class="but"></th>';
-    htm += '<th colspan="2"><input type="button" id="but2" value="А-Я" class="but"></th></tr>';
+    htm += '<tr><th colspan="2"><input type="button" id="but1" value="А-Я" class="but" onclick="sortMas(mas1)"></th>';
+    htm += '<th colspan="2"><input type="button" id="but2" value="А-Я" class="but" onclick="sortMas(mas2)"></th></tr>';
 
     for(i = 0; i < tabMin; i++) {
         htm += '<tr><td>' + mas1[i] +'</td>';
@@ -55,96 +55,33 @@ function clearMas(mas){//очистка массива
     mas.length = 0;
     printMas(mas1, mas2);
 }
-
+/*
 var butSort1 = document.getElementById('but1'),
     butSort2 = document.getElementById('but2');
 butSort1.addEventListener("click", wrapper(mas1));
-butSort2.addEventListener("click", wrapper(mas2));
+butSort2.addEventListener("click", wrapper(mas2));*/
 
-
-function wrapper(mas){
-    return function sortMas(){
-        mas = mas.sort();
-        var i = 0,
-            j = 0,
-            myTable = document.getElementById('tab'),
-            trList = myTable.getElementsByTagName('tr');
-        for (i = 1; i <= trList.length - 1; i++){
-            var tdList = trList[i].getElementsByTagName('td');
-                if (mas == mas1) {
-                    if(i > mas.length){
-                        tdList[0].innerHTML = '';
-                    }
-                    else {
-                        tdList[0].innerHTML = mas[i - 1];
-                    }
-                }
-                else {
-                    if(i > mas.length) {
-                        tdList[2].innerHTML = '';
-                    }
-                    else {
-                        tdList[2].innerHTML = mas[i - 1];
-                    }
-                }
-        }
-        //printMas(mas1, mas2);
-
-        if (mas == mas1) {
-            //printMas(mas1, mas2);
-            butSort1.value = 'Я-А';
-            butSort1.removeEventListener("click", wrapper(mas));
-            butSort1.addEventListener("click", wrapper2(mas));
-        }
-        else {
-            //printMas(mas1, mas2);
-            butSort2.value = 'Я-А';
-            butSort2.removeEventListener("click", wrapper(mas));
-            butSort2.addEventListener("click", wrapper2(mas));
-        }
-
-
+function sortMas(mas){
+    var button1 = document.getElementById('but1'),
+        button2 = document.getElementById('but2'),
+        arr = [];
+    for(var i = 0; i < mas.length; i++){
+        arr[i] = mas[i];
     }
-}//сортировка первого а-я
-
-function wrapper2(mas){
-    return function sortMasRev(){
-        mas = mas.sort().reverse();
-        var myTable = document.getElementById('tab'),
-            trList = myTable.getElementsByTagName('tr'),
-            i;
-        for (i = 1; i <= trList.length - 1; i++){
-            var tdList = trList[i].getElementsByTagName('td');
-            if (mas == mas1) {
-                if(i > mas.length){
-                    tdList[0].innerHTML = '';
-                }
-                else {
-                    tdList[0].innerHTML = mas[i - 1];
-                }
-            }
-            else {
-                if(i > mas.length) {
-                    tdList[2].innerHTML = '';
-                }
-                else {
-                    tdList[2].innerHTML = mas[i - 1];
-                }
-            }
-        }// printMas(mas1, mas2);
-        if (mas == mas1) {
-            butSort1.value = 'А-Я';
-            butSort1.removeEventListener("click", wrapper2(mas));
-            butSort1.addEventListener("click", wrapper(mas));
-        }
-        else {
-            butSort2.value = 'А-Я';
-            butSort2.removeEventListener("click", wrapper2(mas));
-            butSort2.addEventListener("click", wrapper(mas));
-        }
+    arr = arr.sort();
+    if (mas == arr.sort()) {
+        mas = mas.sort();
+        printMas(mas1, mas2);
+        button1.value = 'А-Я';
+        console.log(mas);
+    }
+    else {
+        mas = mas.reverse();
+        printMas(mas1, mas2);
+        button1.value = 'Я-А';
+        console.log(mas);
     }
 }
-
 
 function deleteElemWithArray(id){
         var count = 0, i, butDelElem;
