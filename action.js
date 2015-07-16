@@ -1,5 +1,5 @@
 ﻿var mas1 = ["Яблоко", "Груша", "Апельсин","Банан"],
-    mas2 = ["груша", "вишня", "арбуз", "слива"];
+    mas2 = ["груша", "вишня", "арбуз", "слива", "маракуйя"];
 
 printMas(mas1, mas2);
 
@@ -40,20 +40,53 @@ function printMas(mas1, mas2){//перерисовка данных таблиц
 function hideMenu(id){//скрыть/раскрыть меню
     var menu = document.getElementById(id).style.display;
     document.getElementById(id).style.display = (menu == 'none') ? 'block' : 'none';
-    if(id != 'menuAdd' && document.getElementById('menuAdd').style.display == 'block') {
-        document.getElementById('menuAdd').style.display = 'none';
+    if(document.getElementById('checkDelEl1').checked){
+        document.getElementById('checkDelEl1').checked = false;
     }
+    if(document.getElementById('checkDelEl2').checked){
+        document.getElementById('checkDelEl2').checked = false;
+    }
+}
+
+function checkElementInArray(elem, mas){//наличие элемента elem в массиве
+    var i,                              //если есть - true, иначе false
+        arr = [],
+        result;
+    for(i = 0; i < mas.length; i++){
+        arr[i] = mas[i];
+        arr[i] = arr[i].toUpperCase();
+    }
+    elem = elem.toUpperCase();
+    for(i = 0; i < arr.length; i++){
+        if(arr[i] === elem) {
+            result = true;
+            break;
+        }
+        else {
+            result = false;
+        }
+    }
+    return result;
 }
 
 function addElemInMas(mas){
     var elem = (mas == mas1) ? document.getElementById('addElem').value : document.getElementById('addElem2').value;
-    mas.push(elem);
-    printMas(mas1, mas2);//вывод на экран
+    if(checkElementInArray(elem, mas) || elem == "") {
+        alert('Добавление невозможно!');
+    }
+    else {
+        mas.push(elem);
+        printMas(mas1, mas2);//вывод на экран
+    }
+    mas == mas1 ? document.getElementById('addElem').value = '' : document.getElementById('addElem2').value = '';
 }
 
 function clearMas(mas){//очистка массива
+    var id = (mas == mas1) ? 'menuClear' : 'menu2Clear';
     mas.length = 0;
     printMas(mas1, mas2);
+    hideMenu(id);
+    mas == mas1 ? document.getElementById('checkClear').checked = false : document.getElementById('check2Clear').checked = false;
 }
 
 function compare(mas1, mas2) {//сравнение двух массивов
@@ -65,24 +98,42 @@ function compare(mas1, mas2) {//сравнение двух массивов
 
 function sortMas(mas){
     var arr = [],
-        id = (mas == mas1) ? 'but1' : 'but2';
+        value;
     for(var i = 0; i < mas.length; i++){
         arr[i] = mas[i];
     }
     arr = arr.sort();
-    if (compare(mas, arr)) {
-        mas = mas.sort().reverse();
-        printMas(mas1, mas2);
-        document.getElementById(id).value = "А-Я";
-        console.log(arr);
-        console.log(mas);
+    if(mas == mas1) {
+        if (compare(mas, arr)) {
+            value = document.getElementById('but2').value;
+            mas = mas.sort().reverse();
+            printMas(mas1, mas2);
+            document.getElementById('but1').value = "А-Я";
+            document.getElementById('but2').value = value;
+        }
+        else {
+            value = document.getElementById('but2').value;
+            mas = mas.sort();
+            printMas(mas1, mas2);
+            document.getElementById('but1').value = "Я-А";
+            document.getElementById('but2').value = value;
+        }
     }
     else {
-        mas = mas.sort();
-        printMas(mas1, mas2);
-        document.getElementById(id).value = "Я-А";
-        console.log(arr);
-        console.log(mas);
+        if (compare(mas, arr)) {
+            value = document.getElementById('but1').value;
+            mas = mas.sort().reverse();
+            printMas(mas1, mas2);
+            document.getElementById('but2').value = "А-Я";
+            document.getElementById('but1').value = value;
+        }
+        else {
+            value = document.getElementById('but1').value;
+            mas = mas.sort();
+            printMas(mas1, mas2);
+            document.getElementById('but2').value = "Я-А";
+            document.getElementById('but1').value = value;
+        }
     }
 
 }
@@ -94,12 +145,19 @@ function deleteElemWithArray(id){
                 document.getElementById('cb'+i).style.display = "";
             }
             document.getElementById('butDelElem1').style.display = "";
+            document.getElementById('checkAdd').checked = false;
+            document.getElementById('checkClear').checked = false;
+            if(document.getElementById('menuAdd').style.display == 'block') {
+                document.getElementById('menuAdd').style.display = 'none';
+            }
         }
         else {
             for(i = 0; i < mas2.length; i++){
                 document.getElementById('cb1'+i).style.display = "";
             }
             document.getElementById('butDelElem2').style.display = "";
+            document.getElementById('checkAdd2').checked = false;
+            document.getElementById('check2Clear').checked = false;
         }
 }
 

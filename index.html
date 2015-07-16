@@ -18,7 +18,7 @@
 <a href="#" onclick="hideMenu('menu1'); return false">Работа с массивом 1</a>
 <div id="menu1" style="display: none">
     <form method="post">
-        <input type="checkbox" onclick="hideMenu('menuAdd')" name="a"/>Добавить элемент<br/>
+        <input type="checkbox" onclick="hideMenu('menuAdd')" name="a" id="checkAdd"/>Добавить элемент<br/>
         <div id="menuAdd" style="display: none">
             <form>
                 <input type="text" id="addElem" class="addTExt"/>
@@ -45,14 +45,14 @@
     <a href="#" onclick="hideMenu('menu2'); return false">Работа с массивом 2</a>
 <div id="menu2" style="display: none">
     <form method="post">
-        <input type="checkbox" onclick="hideMenu('menu2Add')" name="a"/>Добавить элемент<br/>
+        <input type="checkbox" onclick="hideMenu('menu2Add')" name="a" id="checkAdd2"/>Добавить элемент<br/>
         <div id="menu2Add" style="display: none">
             <form>
                 <input type="text" id="addElem2" class="addTExt"/>
                 <input type="button" id="butAdd2" onclick="addElemInMas(mas2)"  value="Добавить" class="but">
             </form>
         </div>
-        <input type="checkbox" name="a" onclick="deleteElemWithArray(2)"/>Удалить элемент<br/>
+        <input type="checkbox" name="a" id="checkDelEl2" onclick="deleteElemWithArray(2)"/>Удалить элемент<br/>
         <input type="checkbox" name="a" id="check2Clear" onclick="hideMenu('menu2Clear')"/>Очистить массив<br/>
         <div id="menu2Clear" style="display: none">
             <form class="formShow" style="text-align: center; margin: auto">
