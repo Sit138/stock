@@ -1,77 +1,42 @@
 ﻿var mas1 = ["Яблоко", "Груша", "Банан"];
 var mas2 = ["груша", "вишня", "арбуз", "слива"];
-showMas(mas1, mas2);
-function showMas(mas1, mas2){
-    var i = 0,
-        table = document.getElementById('tab').getElementsByTagName('TBODY')[0],
-        row = document.createElement('tr'),
-        td1 = document.createElement('tr'),
-        td2 = document.createElement('td'),
-        td3 = document.createElement('td'),
-        td4 = document.createElement('td'),
-        check = document.createElement("input"),
-        check2 = document.createElement("input");
-    //First array
-    if (mas1.length > mas2.length) {
-        for(i = 0; i < mas1.length; i++) {
-            td1.appendChild(document.createTextNode(mas1[i]));
-            check.setAttribute("type", "checkbox");
-            check.setAttribute("id", "cb"+i);
-            check.setAttribute("style", "display:none");
-            td2.appendChild(check);
-            check2.setAttribute("type", "checkbox");
-            check2.setAttribute("id", "cb1"+i);
-            check2.setAttribute("style", "display:none");
-            if (i == mas2.length){
-                td3.appendChild(document.createTextNode(''));
-                td4.appendChild(document.createTextNode(''));
-            }
-                else {
-                    td3.appendChild(document.createTextNode(mas2[i]));
-                    td4.appendChild(check2);
-            }
-            row.appendChild(td1);
-            row.appendChild(td2);
-            row.appendChild(td3);
-            row.appendChild(td4);
-            table.appendChild(row);
+
+printMas(mas1, mas2);
+function printMas(mas1, mas2){//перерисовка данных таблицы
+    var htm = '<table id="tab" border="2">',
+        i,
+        mas1Length = mas1.length, mas2Length = mas2.length,
+        tabLength = (mas1Length > mas2Length) ? mas1Length : mas2Length,//количество строк таблицы
+        tabMin = (mas1Length < mas2Length) ? mas1Length : mas2Length;//строка где массивы равны
+
+    htm += '<tr><th colspan="2"><input type="button" id="but1" value="А-Я" class="but"></th>';
+    htm += '<th colspan="2"><input type="button" id="but2" value="А-Я" class="but"></th></tr>';
+
+    for(i = 0; i < tabMin; i++) {
+        htm += '<tr><td>' + mas1[i] +'</td>';
+        htm += '<td><input type="checkbox" style="display: none" id='+'"cb'+ i + '"' + '></td>'; //ID = cb + i
+        htm += '<td>' + mas2[i] +'</td>';
+        htm += '<td><input type="checkbox" style="display: none" id='+'"cb1'+ i + '"' + '></td></tr>';
+    }
+    for(i; i < tabLength; i++){
+        if(mas1Length > mas2Length) {
+            htm += '<tr><td>' + mas1[i] +'</td>';
+            htm += '<td><input type="checkbox" style="display: none" id='+'"cb'+ i + '"' + '></td>';
+            htm += '<td>' + "" +'</td>';
+            htm += '<td>' + "" +'</td></tr>';
+        }
+        else {
+            htm += '<tr><td>' + "" +'</td>';
+            htm += '<td>' + "" +'</td>';
+            htm += '<td>' + mas2[i] +'</td>';
+            htm += '<td><input type="checkbox" style="display: none" id='+'"cb1'+ i + '"' + '></td></tr>';
         }
     }
-    //Second array
-    else {
-        for(i = 0; i < mas2.length; i++){
-            row = document.createElement('TR');
-            td1 = document.createElement('TD');
-            td2 = document.createElement('TD');
-            check = document.createElement("INPUT");
-            check.setAttribute("type", "checkbox");
-            check.setAttribute("id", "cb"+i);
-            check.setAttribute("style", "display:none");
-            if(i == mas1.length){
-                td1.appendChild(document.createTextNode(''));
-                td2.appendChild(document.createTextNode(''));
-            }
-            else {
-                td1.appendChild(document.createTextNode(mas1[i]));
-                td2.appendChild(check);
-            }
-            td3 = document.createElement('TD');
-            td3.appendChild(document.createTextNode(mas2[i]));
-            td4 = document.createElement('TD');
-            check2 = document.createElement("INPUT");
-            check2.setAttribute("type", "checkbox");
-            check2.setAttribute("id", "cb1"+i);
-            check2.setAttribute("style", "display:none");
-            td4.appendChild(check2);
-            row.appendChild(td1);
-            row.appendChild(td2);
-            row.appendChild(td3);
-            row.appendChild(td4);
-            table.appendChild(row);
-        }
-    }
-}//отображение массива на экране
-function hideMenu(id){
+    htm += '</table>';
+    document.getElementById('tab').innerHTML = htm;
+}
+
+function hideMenu(id){//раскрытие меню
     var menu = document.getElementById(id).style.display;
     document.getElementById(id).style.display = (menu == 'none') ? 'block' : 'none';
     if(id != 'menuAdd' && document.getElementById('menuAdd').style.display == 'block') {
@@ -79,89 +44,16 @@ function hideMenu(id){
     }
 
 }//скрыть/раскрыть меню
-/*
-function addElemOnMas(id, mas) {//добавление элемента с выводом на экран
-    var elem = document.getElementById('addElem').value;
-    document.getElementById('addElem').value = '';
-    if (id == "butAdd1") {
-        //First array
-        if (mas.length < document.getElementById('tab').rows.length - 1) {
-            var table = document.getElementById('tab'),
-                row = table.getElementsByTagName('tr'),
-                td = row[mas.length + 1].getElementsByTagName('td'),
-                check = document.createElement("input");
-            td[0].innerHTML = elem;
-            check.setAttribute("type", "checkbox");
-            check.setAttribute("id", "cb" + (mas.length));
-            check.setAttribute("value", mas.length + 1);
-            check.setAttribute("style", "display:none");
-            td[1].appendChild(check);
-        }
-        else {
-            var tableDown = document.getElementById('tab').getElementsByTagName('TBODY')[0],
-                row = document.createElement('tr'),
-                td1 = document.createElement('td'),
-                td2 = document.createElement('td'),
-                check = document.createElement("input"),
-                td3 = document.createElement('td'),
-                td4 = document.createElement('td');
-            td1.appendChild(document.createTextNode(elem));
-            check.setAttribute("type", "checkbox");
-            check.setAttribute("id", "cb" + (mas.length));
-            check.setAttribute("value", mas.length + 1);
-            check.setAttribute("style", "display:none");
-            td2.appendChild(check);
-            td3.appendChild(document.createTextNode(""));
-            td4.appendChild(document.createTextNode(""));
-            row.appendChild(td1);
-            row.appendChild(td2);
-            row.appendChild(td3);
-            row.appendChild(td4);
-            tableDown.appendChild(row);
-        }
-    }
-    //Second array
-    else{
-        elem = document.getElementById('addElem2').value;
-        document.getElementById('addElem2').value = '';
-        if (mas.length < document.getElementById('tab').rows.length-1){
-            var table = document.getElementById('tab'),
-                row = table.getElementsByTagName('tr'),
-                td = row[mas.length + 1].getElementsByTagName('td'),
-                check = document.createElement("input");
-            td[2].innerHTML = elem;
-            check.setAttribute("type", "checkbox");
-            check.setAttribute("id", "cb1" + (mas.length));
-            check.setAttribute("value", mas.length + 1);
-            check.setAttribute("style", "display:none");
-            td[3].appendChild(check);
-        }
-        else{
-            var table = document.getElementById('tab').getElementsByTagName('TBODY')[0],
-                row = document.createElement('tr'),
-                td1 = document.createElement('td'),
-                td2 = document.createElement('td'),
-                td3 = document.createElement('td'),
-                td4 = document.createElement('td'),
-                check = document.createElement("input");
-            td1.appendChild(document.createTextNode(""));
-            td2.appendChild(document.createTextNode(""));
-            td3.appendChild(document.createTextNode(elem));
-            check.setAttribute("type", "checkbox");
-            check.setAttribute("id", "cb1" + (mas.length));
-            check.setAttribute("value", mas.length + 1);
-            check.setAttribute("style", "display:none");
-            td4.appendChild(check);
-            row.appendChild(td1);
-            row.appendChild(td2);
-            row.appendChild(td3);
-            row.appendChild(td4);
-            table.appendChild(row);
-        }
-    }
+
+function addElemInMas(mas){
+    var elem = (mas == mas1) ? document.getElementById('addElem').value : document.getElementById('addElem2').value
     mas.push(elem);
-    console.log(mas1);
-    console.log(mas2);
+    printMas(mas1, mas2);//вывод на экран
+}
+
+function clearMas(mas){//очистка массива
+    mas.length = 0;
+    printMas(mas1, mas2);
 }
 
 var butSort1 = document.getElementById('but1'),
@@ -196,12 +88,16 @@ function wrapper(mas){
                     }
                 }
         }
+        //printMas(mas1, mas2);
+
         if (mas == mas1) {
+            //printMas(mas1, mas2);
             butSort1.value = 'Я-А';
             butSort1.removeEventListener("click", wrapper(mas));
             butSort1.addEventListener("click", wrapper2(mas));
         }
         else {
+            //printMas(mas1, mas2);
             butSort2.value = 'Я-А';
             butSort2.removeEventListener("click", wrapper(mas));
             butSort2.addEventListener("click", wrapper2(mas));
@@ -210,11 +106,13 @@ function wrapper(mas){
 
     }
 }//сортировка первого а-я
+
 function wrapper2(mas){
     return function sortMasRev(){
         mas = mas.sort().reverse();
-        var myTable = document.getElementById('tab');
-        var trList = myTable.getElementsByTagName('tr');
+        var myTable = document.getElementById('tab'),
+            trList = myTable.getElementsByTagName('tr'),
+            i;
         for (i = 1; i <= trList.length - 1; i++){
             var tdList = trList[i].getElementsByTagName('td');
             if (mas == mas1) {
@@ -233,7 +131,7 @@ function wrapper2(mas){
                     tdList[2].innerHTML = mas[i - 1];
                 }
             }
-        }
+        }// printMas(mas1, mas2);
         if (mas == mas1) {
             butSort1.value = 'А-Я';
             butSort1.removeEventListener("click", wrapper2(mas));
@@ -246,103 +144,36 @@ function wrapper2(mas){
         }
     }
 }
-function clearMas(id, mas){//очистка массива
-    var i, j, colList,
-        table = document.getElementById('tab'),
-        rowList = table.getElementsByTagName('tr');
-    if(id == "butClear1"){
-        mas.length = 0;//очистил массив
-        //теперь выводим его(очищаем столбец)
-        for(i = 1; i < rowList.length; i++){
-            colList = rowList[i].getElementsByTagName('td');
-            for(j = 0; j <= 1; j++){
-                colList[j].innerHTML = '';
-            }
-        }
-        document.getElementById('checkClear').checked = '';
-        hideMenu('menuClear');
-    }
-    else{
-        if(id == "butClear2"){
-            mas.length = 0;//очистил массив
-            //теперь выводим его(очищаем столбец)
-            for(i = 1; i < rowList.length; i++){
-                colList = rowList[i].getElementsByTagName('td');
-                for(j = 2; j <= 3; j++){
-                    colList[j].innerHTML = '';
-                }
-            }
-        }
-        document.getElementById('check2Clear').checked = '';
-        hideMenu('menu2Clear');
-    }
-}
-*/
-/*
-Вот здесь чтото не так начинается
- */
+
+
 function deleteElemWithArray(id){
         var count = 0, i, butDelElem;
         if(id == 1){
             for(i = 0; i < mas1.length; i++){
                 document.getElementById('cb'+i).style.display = "";
             }
-            butDelElem = document.getElementById('butDelElem1');
-            butDelElem.style.display = "";
-            butDelElem.addEventListener("click", deleteElem(mas1));
+            document.getElementById('butDelElem1').style.display = "";
         }//второй массив не нужно рассматривать пока
         else{
             for(i = 0; i < mas2.length; i++){
                 document.getElementById('cb1'+i).style.display = "";
             }
-            butDelElem = document.getElementById('butDelElem2');
-            butDelElem.style.display = "";
-            butDelElem.addEventListener("click", deleteElem(mas2));
+            document.getElementById('butDelElem2').style.display = "";
         }
 }
+
 function deleteElem(mas){
-    return function fun(){
         var checkMas = [];
         var j = 0;
         if(mas == mas1){
-            /*Получаем массив индексов, где checked == true*/
             for(var i = 0; i < mas.length; i++){
                 if(document.getElementById('cb'+i).checked){
                     checkMas[j] = i;
                     j++;
                 }
             }
-            delEl(mas, checkMas);//удаляем все элементы, у которых индексы равны checkMas[i]
-            //сразу выводим на экран
-            var table = document.getElementById('tab');
-            var rowList = table.getElementsByTagName('tr');
-            for(var i = 1; i < rowList.length; i++){
-                var colList = rowList[i].getElementsByTagName('td');
-                for(var j = 0; j <= 1; j++){
-                    colList[j].innerHTML = '';
-                }
-            }
-            var trList = table.getElementsByTagName('tr');
-            for (i = 1; i <= trList.length - 1; i++){
-                var tdList = trList[i].getElementsByTagName('td');
-                for (var j = 0; j < 1; j++){
-                        if(i > mas.length){
-                            tdList[0].innerHTML = '';
-                        }
-                        else {
-                            tdList[0].innerHTML = mas[i - 1];
-                            var check = document.createElement("input");
-                            check.setAttribute("type", "checkbox");
-                            check.setAttribute("id", "cb"+(i-1));
-                            check.setAttribute("value", mas.length + 1);
-                            check.setAttribute("style", "display:none");
-                            tdList[1].appendChild(check);
-                        }
-                }
-            }
-            var butDelElem = document.getElementById('butDelElem1');
-            butDelElem.style.display = "none";
-            butDelElem.removeEventListener("click", deleteElem(mas1));
+            delElement(mas, checkMas);//удаляем все элементы, у которых индексы равны checkMas[i]
+            printMas(mas1, mas2);
         }
         else  { //второй массив
             for(var i = 0; i < mas.length; i++){
@@ -351,38 +182,12 @@ function deleteElem(mas){
                     j++;
                 }
             }
-            delEl(mas, checkMas);
-            var table = document.getElementById('tab');
-            var rowList = table.getElementsByTagName('tr');
-            for(var i = 1; i < rowList.length; i++){
-                var colList = rowList[i].getElementsByTagName('td');
-                for(var j = 2; j <= 3; j++){
-                    colList[j].innerHTML = '';
-                }
-            }
-            var trList = table.getElementsByTagName('tr');
-            for (i = 1; i <= trList.length - 1; i++){
-                var tdList = trList[i].getElementsByTagName('td');
-                for (var j = 0; j < 1; j++){
-                    if(i > mas.length){
-                        tdList[2].innerHTML = '';
-                    }
-                    else {
-                        tdList[2].innerHTML = mas[i - 1];
-                        var check = document.createElement("input");
-                        check.setAttribute("type", "checkbox");
-                        check.setAttribute("id", "cb"+i);
-                        check.setAttribute("value", mas.length + 1);
-                        check.setAttribute("style", "display:none");
-                        tdList[3].appendChild(check);
-                    }
-
-                }
-            }
+            delElement(mas, checkMas);
+            printMas(mas1, mas2);
         }
-    }
 }
-function delEl(mas, masCheck){
+
+function delElement(mas, masCheck){//принимает сходный массив + массив индексов для удаления
     var checkMas = masCheck;
     var j = 0;
     do{
@@ -401,11 +206,7 @@ function delEl(mas, masCheck){
     }while(j != checkMas.length);
     console.log(mas);
 }
-/*
-Конец
- */
 
-/*
 function compareMas(mas1, mas2){
     //var htm = printMas(mas1, mas2);
     var htm = '<p>';
@@ -427,7 +228,7 @@ function compareMas(mas1, mas2){
     document.getElementById('result').innerHTML = htm;
 }
 
-function findStr(mas1, mas2){
+function findCharToMas(mas){//поиск символов в массиве
     var srt = document.getElementById('str').value,
         i = 0, j = 0, charLetter,
         htm = '<p><b>Найденные совпадения в массиве 1<b><br/>';
@@ -443,20 +244,12 @@ function findStr(mas1, mas2){
         }
         htm += ' ';
     }
-    htm += '</p><p><b>Найденные совпадения в массиве 2<b><br/>';
-    for (i = 0; i < mas2.length; i++) {
-        for (j = 0; j < mas2[i].length; j++) {
-            charLetter = mas2[i].charAt(j); //беру текущий символ текущего слова
-            if (srt.indexOf(charLetter.toLowerCase()) == -1) {//если есть в в поисковой строке то...
-                htm += '' + mas2[i].charAt(j);
-            }
-            else {
-                htm += '' + mas2[i].charAt(j).fontcolor('red');
-            }
-        }
-        htm += ' ';
-    }
     htm += '</p>';
+    return htm;
+}
+
+function findStr(mas1, mas2){
+    var htm = findCharToMas(mas1);//ищем символы в первом массиве и добавляем к htm
+    htm += findCharToMas(mas2);
     document.getElementById('result3').innerHTML = htm;
 }
-    */

@@ -6,14 +6,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <p>
+    <!--div id="tab"></div-->
 <table border="2" id="tab">
     <tr><th colspan="2"><input type="button" id="but1" value="А-Я" class="but"></th>
         <th colspan="2"><input type="button" id="but2" value="А-Я" class="but"></th></tr>
-    <tbody>
-    </tbody>
 </table>
-<input type="button" style="display: none" value="Удалить" id="butDelElem1" class="but">
-<input type="button" style="display: none" value="Удалить" id="butDelElem2" class="but">
+<input type="button" style="display: none" value="Удалить" id="butDelElem1" class="but" onclick="deleteElem(mas1)">
+<input type="button" style="display: none" value="Удалить" id="butDelElem2" class="but" onclick="deleteElem(mas2)">
 <script src="action.js"></script>
 <p>
 <a href="#" onclick="hideMenu('menu1'); return false">Работа с массивом 1</a>
@@ -23,7 +22,7 @@
         <div id="menuAdd" style="display: none">
             <form>
                 <input type="text" id="addElem" class="addTExt"/>
-                <input type="button" id="butAdd1" onclick="addElemOnMas('butAdd1', mas1)" value="Добавить" class="but"/>
+                <input type="button" id="butAdd1" onclick="addElemInMas(mas1)" value="Добавить" class="but"/>
             </form>
         </div>
         <input type="checkbox" name="a" id="checkDelEl1" onclick="deleteElemWithArray(1)"/>Удалить элемент<br/>
@@ -33,7 +32,7 @@
                 <fieldset style="width: 150px">
                     <legend></legend>
                     Вы уверены, что хотите очистить массив?<br/>
-                    <input type="button" value="Да" id="butClear1" onclick="clearMas('butClear1', mas1)" class="but">
+                    <input type="button" value="Да" id="butClear1" onclick="clearMas(mas1)" class="but">
                     <input type="button" value="Отмена" onclick="hideMenu('menuClear')" class="but">
                 </fieldset>
             </form>
@@ -50,7 +49,7 @@
         <div id="menu2Add" style="display: none">
             <form>
                 <input type="text" id="addElem2" class="addTExt"/>
-                <input type="button" id="butAdd2" onclick="addElemOnMas('butAdd2',mas2)"  value="Добавить" class="but">
+                <input type="button" id="butAdd2" onclick="addElemInMas(mas2)"  value="Добавить" class="but">
             </form>
         </div>
         <input type="checkbox" name="a" onclick="deleteElemWithArray(2)"/>Удалить элемент<br/>
@@ -60,7 +59,7 @@
                 <fieldset style="width: 150px">
                     <legend></legend>
                     Вы уверены, что хотите очистить массив?<br/>
-                    <input type="button" value="Да" id="butClear2" onclick="clearMas('butClear2', mas2)" class="but">
+                    <input type="button" value="Да" id="butClear2" onclick="clearMas(mas2)" class="but">
                     <input type="button" value="Отмена" onclick="hideMenu('menu2Clear')" class="but">
                 </fieldset>
             </form>
