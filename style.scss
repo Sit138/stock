@@ -1,0 +1,36 @@
+﻿$myGrad:linear-gradient(to top, #87CEFA 10%, #ADD8E6 50%, #E0FFFF 100%);
+@mixin border-radius($radius){
+	-moz-border-radius:$radius;
+	-webkit-border-radius:$radius;
+	border-radius:$radius;
+}
+@mixin mainStyle{
+	background:$myGrad; 
+	font-size: 14px;
+	padding: 10px 20px;
+	color: black;
+	border: 1px solid #333;
+	@include border-radius(5px);
+}
+a{
+	@include mainStyle;
+}
+.but{
+	height:40px;
+	@include mainStyle;
+}
+.formshow{
+	background-color:red;
+	width:180px;
+}
+table{
+	margin:auto;
+}
+body{
+	text-align:center;
+	background-color:snow;
+}
+.addTExt{
+	color: black;
+	background-color: lightgrey;
+}
